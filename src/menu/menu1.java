@@ -8,6 +8,7 @@ package menu;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import menu.packageventas.administracion.bancos;
 import menu.packageventas.venta;
 
 
@@ -17,6 +18,8 @@ import menu.packageventas.venta;
  * @author CotoF
  */
 public class menu1 extends javax.swing.JFrame {
+    GridBagLayout layout=new GridBagLayout ();
+    bancos b1;
 
 
 /////desktop2/////
@@ -32,6 +35,14 @@ panelventas.setVisible(false);
 panelbodega.setVisible(false);
 panelinformes.setVisible(false);
 paneladministracion.setVisible(false);
+
+b1=new bancos();
+desktopadmin.setLayout(layout);
+GridBagConstraints c=new GridBagConstraints();
+c.gridx=0;
+c.gridy=0;
+desktopadmin.add(b1,c);
+b1.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -69,13 +80,21 @@ paneladministracion.setVisible(false);
         menuinformes = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         paneladministracion = new javax.swing.JPanel();
         menuadministracion = new javax.swing.JPanel();
+        jButton17 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
+        jButton18 = new javax.swing.JButton();
+        desktopadmin = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 550));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
@@ -178,14 +197,14 @@ paneladministracion.setVisible(false);
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(33, 33, 33))
+                .addGap(34, 34, 34))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel5)
-                .addGap(52, 52, 52)
+                .addGap(68, 68, 68)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,8 +214,6 @@ paneladministracion.setVisible(false);
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(152, Short.MAX_VALUE))
         );
-
-        panelventas.setBackground(new java.awt.Color(255, 102, 102));
 
         menuventa.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -221,11 +238,9 @@ paneladministracion.setVisible(false);
         panelventasLayout.setVerticalGroup(
             panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelventasLayout.createSequentialGroup()
-                .addComponent(menuventa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 500, Short.MAX_VALUE))
+                .addComponent(menuventa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 517, Short.MAX_VALUE))
         );
-
-        panelbodega.setBackground(new java.awt.Color(255, 255, 0));
 
         menubodega.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -247,11 +262,9 @@ paneladministracion.setVisible(false);
         panelbodegaLayout.setVerticalGroup(
             panelbodegaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelbodegaLayout.createSequentialGroup()
-                .addComponent(menubodega, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 500, Short.MAX_VALUE))
+                .addComponent(menubodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 517, Short.MAX_VALUE))
         );
-
-        panelinformes.setBackground(new java.awt.Color(0, 153, 153));
 
         menuinformes.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -261,50 +274,90 @@ paneladministracion.setVisible(false);
         jButton6.setText("jButton6");
         menuinformes.add(jButton6);
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelinformesLayout = new javax.swing.GroupLayout(panelinformes);
         panelinformes.setLayout(panelinformesLayout);
         panelinformesLayout.setHorizontalGroup(
             panelinformesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuinformes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menuinformes, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelinformesLayout.setVerticalGroup(
             panelinformesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelinformesLayout.createSequentialGroup()
-                .addComponent(menuinformes, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(menuinformes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        paneladministracion.setBackground(new java.awt.Color(102, 102, 102));
 
         menuadministracion.setBackground(new java.awt.Color(153, 153, 255));
 
-        jButton5.setText("jButton5");
+        jButton17.setText("Proveedores");
+        menuadministracion.add(jButton17);
+
+        jButton16.setText("Packs");
+        menuadministracion.add(jButton16);
+
+        jButton14.setText("Categoria pack");
+        menuadministracion.add(jButton14);
+
+        jButton15.setText("Comunas");
+        menuadministracion.add(jButton15);
+
+        jButton12.setText("Articulos");
+        menuadministracion.add(jButton12);
+
+        jButton13.setText("Categoria articulos");
+        menuadministracion.add(jButton13);
+
+        jButton11.setText("RRSS");
+        menuadministracion.add(jButton11);
+
+        jButton5.setText("Bancos");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
         menuadministracion.add(jButton5);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jButton18.setText("Usuarios");
+        menuadministracion.add(jButton18);
+
+        javax.swing.GroupLayout desktopadminLayout = new javax.swing.GroupLayout(desktopadmin);
+        desktopadmin.setLayout(desktopadminLayout);
+        desktopadminLayout.setHorizontalGroup(
+            desktopadminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 494, Short.MAX_VALUE)
+        desktopadminLayout.setVerticalGroup(
+            desktopadminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 511, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout paneladministracionLayout = new javax.swing.GroupLayout(paneladministracion);
         paneladministracion.setLayout(paneladministracionLayout);
         paneladministracionLayout.setHorizontalGroup(
             paneladministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuadministracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menuadministracion, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+            .addComponent(desktopadmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         paneladministracionLayout.setVerticalGroup(
             paneladministracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneladministracionLayout.createSequentialGroup()
                 .addComponent(menuadministracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(desktopadmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelprincipalLayout = new javax.swing.GroupLayout(panelprincipal);
@@ -377,6 +430,12 @@ panelinformes.setVisible(false);
 paneladministracion.setVisible(true);
     }//GEN-LAST:event_btnAdministracionMouseClicked
 
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+b1.setVisible(true);
+
+        
+    }//GEN-LAST:event_jButton5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -417,8 +476,17 @@ paneladministracion.setVisible(true);
     private javax.swing.JLabel btnBodega;
     private javax.swing.JLabel btnInformes;
     private javax.swing.JLabel btnVentas;
+    private javax.swing.JPanel desktopadmin;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -429,11 +497,11 @@ paneladministracion.setVisible(true);
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel menuadministracion;
     private javax.swing.JPanel menubodega;
     private javax.swing.JPanel menuinformes;
