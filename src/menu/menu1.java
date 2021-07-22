@@ -8,7 +8,7 @@ package menu;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import menu.packageventas.administracion.bancos;
+import menu.packageadmin.bancos;
 import menu.packageventas.venta;
 
 
