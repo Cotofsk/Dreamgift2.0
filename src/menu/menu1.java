@@ -9,6 +9,8 @@ package menu;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import menu.packageadmin.bancos.bancos;
+import menu.packageadmin.comunas.comunas;
+import menu.packageadmin.rrss.rrss;
 import menu.packageventas.venta;
 
 
@@ -20,6 +22,8 @@ import menu.packageventas.venta;
 public class menu1 extends javax.swing.JFrame {
     GridBagLayout layout=new GridBagLayout ();
     bancos b1;
+    comunas c1;
+    rrss rr1;
 
 
 /////desktop2/////
@@ -37,12 +41,22 @@ panelinformes.setVisible(false);
 paneladministracion.setVisible(false);
 
 b1=new bancos();
+rr1=new rrss();
+c1=new comunas();
 desktopadmin.setLayout(layout);
 GridBagConstraints c=new GridBagConstraints();
 c.gridx=0;
 c.gridy=0;
 desktopadmin.add(b1,c);
+c.gridx=0;
+c.gridy=0;
+desktopadmin.add(rr1,c);
+c.gridx=0;
+c.gridy=0;
+desktopadmin.add(c1,c);
 b1.setVisible(false);
+rr1.setVisible(false);
+c1.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -312,6 +326,11 @@ b1.setVisible(false);
         menuadministracion.add(jButton14);
 
         jButton15.setText("Comunas");
+        jButton15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton15MouseClicked(evt);
+            }
+        });
         menuadministracion.add(jButton15);
 
         jButton12.setText("Articulos");
@@ -321,6 +340,11 @@ b1.setVisible(false);
         menuadministracion.add(jButton13);
 
         jButton11.setText("RRSS");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
         menuadministracion.add(jButton11);
 
         jButton5.setText("Bancos");
@@ -432,9 +456,21 @@ paneladministracion.setVisible(true);
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
 b1.setVisible(true);
-
-        
+rr1.setVisible(false);
+c1.setVisible(false);
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+b1.setVisible(false);
+rr1.setVisible(true);
+c1.setVisible(false);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
+b1.setVisible(false);
+rr1.setVisible(false);
+c1.setVisible(true);
+    }//GEN-LAST:event_jButton15MouseClicked
 
     /**
      * @param args the command line arguments

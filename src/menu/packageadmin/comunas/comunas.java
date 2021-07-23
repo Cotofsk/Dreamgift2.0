@@ -3,102 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package menu.packageadmin.bancos;
-
-import com.mysql.jdbc.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
-import menu.menu1;
-
+package menu.packageadmin.comunas;
 
 /**
  *
  * @author CotoF
  */
-public class bancos extends javax.swing.JPanel {
-    bancos1 vp=new bancos1();
-    
-    public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
-    public static final String USERNAME = "root"; //Usuario de Acceso a MySQL
-    public static final String PASSWORD = ""; //Password del usuario
-    
-    PreparedStatement ps;
-    ResultSet rs;
+public class comunas extends javax.swing.JPanel {
 
-        public static Connection getConection() {
-        Connection con = null;
-
-        try {
-
-            Class.forName("com.mysql.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
-           // JOptionPane.showMessageDialog(null, "Conexion exitosa");
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return con;
-    }
-        
-        
-private void ActualizarAutomaticamente (){
-        
-               
-        DefaultTableModel modelo = (DefaultTableModel) tblBancos.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
-        modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
-        
-        PreparedStatement ps; /*Declarar unas variables para hacer las transacciones*/
-        ResultSet rs;
-        ResultSetMetaData rsmd;
-        int columnas;
-        
-        
-        int [] ancho = {30,80,60,7,90,90,25,25}; /*Arreglo con el ancho de las columnas*/
-        for  (int i = 0; i< tblBancos.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
-         tblBancos.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
-             
-        }   
-        
-        Connection con = null;
-        try { 
-            con = getConection();
-            ps= con.prepareStatement ("SELECT  codigo_banco, nom_banco ,estado FROM bancos");
-       
-            rs= ps.executeQuery();
-            rsmd = rs.getMetaData ();
-            columnas = rsmd.getColumnCount(); /*Cuantas Columnas trae esta consulta*/
-            
-            
-            while(rs.next()){ /*Extraer todo los datos de la consulta*/
-               Object[] filas = new Object[columnas];
-                for (int i = 0; i < columnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(filas);
-                
-            }
-        } catch(SQLException e){
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-  
-    }
-
-                    
     /**
-     * Creates new form bancos
+     * Creates new form comunas
      */
-    public bancos() {
+    public comunas() {
         initComponents();
-        ActualizarAutomaticamente ();
-
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,58 +27,56 @@ private void ActualizarAutomaticamente (){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblBancos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-
-        tblBancos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Codigo", "Nombre", "Estado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblBancos);
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Bancos");
+        jLabel1.setText("Comunas");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Buscar");
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setText("Modificar comuna");
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Nuevo Banco");
+        jButton1.setText("Nueva comuna");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -172,12 +88,6 @@ private void ActualizarAutomaticamente (){
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Modificar Banco");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Buscar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,7 +95,7 @@ private void ActualizarAutomaticamente (){
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -199,7 +109,7 @@ private void ActualizarAutomaticamente (){
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
@@ -226,11 +136,11 @@ private void ActualizarAutomaticamente (){
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-vp.setVisible(true);
+    // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -240,7 +150,7 @@ vp.setVisible(true);
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tblBancos;
     // End of variables declaration//GEN-END:variables
 }
