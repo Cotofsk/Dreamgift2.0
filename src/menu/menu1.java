@@ -32,6 +32,7 @@ public class menu1 extends javax.swing.JFrame {
     articulos a1;
     usuarios u1;
     categoriaarticulo ca ;
+    
 
 
 /////desktop2/////
