@@ -8,7 +8,9 @@ package menu;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import menu.packageadmin.articulos.articulos;
 import menu.packageadmin.bancos.bancos;
+import menu.packageadmin.usuarios.usuarios;
 import menu.packageventas.venta;
 
 
@@ -20,6 +22,8 @@ import menu.packageventas.venta;
 public class menu1 extends javax.swing.JFrame {
     GridBagLayout layout=new GridBagLayout ();
     bancos b1;
+    articulos a1;
+    usuarios u1;
 
 
 /////desktop2/////
@@ -43,6 +47,16 @@ c.gridx=0;
 c.gridy=0;
 desktopadmin.add(b1,c);
 b1.setVisible(false);
+a1=new articulos();
+c.gridx=0;
+c.gridy=0;
+desktopadmin.add(a1,c);
+a1.setVisible(false);
+u1=new usuarios();
+c.gridx=0;
+c.gridy=0;
+desktopadmin.add(u1,c);
+u1.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -233,13 +247,17 @@ b1.setVisible(false);
         panelventas.setLayout(panelventasLayout);
         panelventasLayout.setHorizontalGroup(
             panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuventa, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelventasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(menuventa, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelventasLayout.setVerticalGroup(
             panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelventasLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(menuventa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 517, Short.MAX_VALUE))
+                .addContainerGap(506, Short.MAX_VALUE))
         );
 
         menubodega.setBackground(new java.awt.Color(153, 153, 255));
@@ -282,7 +300,7 @@ b1.setVisible(false);
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 511, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelinformesLayout = new javax.swing.GroupLayout(panelinformes);
@@ -315,6 +333,11 @@ b1.setVisible(false);
         menuadministracion.add(jButton15);
 
         jButton12.setText("Articulos");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
         menuadministracion.add(jButton12);
 
         jButton13.setText("Categoria articulos");
@@ -332,6 +355,11 @@ b1.setVisible(false);
         menuadministracion.add(jButton5);
 
         jButton18.setText("Usuarios");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
         menuadministracion.add(jButton18);
 
         javax.swing.GroupLayout desktopadminLayout = new javax.swing.GroupLayout(desktopadmin);
@@ -432,9 +460,24 @@ paneladministracion.setVisible(true);
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
 b1.setVisible(true);
+a1.setVisible(false);
+u1.setVisible(false);
 
         
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+b1.setVisible(false);
+a1.setVisible(true);
+u1.setVisible(false);
+
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+b1.setVisible(false);
+a1.setVisible(false);
+u1.setVisible(true);       
+    }//GEN-LAST:event_jButton18ActionPerformed
 
     /**
      * @param args the command line arguments
