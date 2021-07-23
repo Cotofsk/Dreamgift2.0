@@ -8,11 +8,13 @@ package menu;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import menu.packageadmin.articulos.articulos;
 import menu.packageadmin.bancos.bancos;
 import menu.packageadmin.categoriaarticulo.categoriaarticulo;
 import menu.packageadmin.comunas.comunas;
 import menu.packageadmin.proveedores.proveedores;
 import menu.packageadmin.rrss.rrss;
+import menu.packageadmin.usuarios.usuarios;
 import menu.packageventas.venta;
 
 
@@ -27,6 +29,9 @@ public class menu1 extends javax.swing.JFrame {
     comunas c1;
     rrss rr1;
     proveedores p1;
+    articulos a1;
+    usuarios u1;
+    
     categoriaarticulo ca ;
 
 
@@ -48,6 +53,8 @@ b1=new bancos();
 rr1=new rrss();
 c1=new comunas();
 p1=new proveedores();
+a1=new articulos();
+u1=new usuarios();
 ca=new categoriaarticulo();
 
 desktopadmin.setLayout(layout);
@@ -57,12 +64,16 @@ c.gridy=0;
 desktopadmin.add(b1,c);
 desktopadmin.add(rr1,c);
 desktopadmin.add(c1,c);
+desktopadmin.add(a1,c);
+desktopadmin.add(u1,c);
 desktopadmin.add(p1,c);
 desktopadmin.add(ca,c);
 b1.setVisible(false);
 rr1.setVisible(false);
 c1.setVisible(false);
 p1.setVisible(false);
+a1.setVisible(false);
+u1.setVisible(false);
 ca.setVisible(false);
     }
 
@@ -108,11 +119,11 @@ ca.setVisible(false);
         jButton16 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        btnarticulos = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
+        btnusuarios = new javax.swing.JButton();
         desktopadmin = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -340,8 +351,13 @@ ca.setVisible(false);
         });
         menuadministracion.add(jButton15);
 
-        jButton12.setText("Articulos");
-        menuadministracion.add(jButton12);
+        btnarticulos.setText("Articulos");
+        btnarticulos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnarticulosActionPerformed(evt);
+            }
+        });
+        menuadministracion.add(btnarticulos);
 
         jButton13.setText("Categoria articulos");
         menuadministracion.add(jButton13);
@@ -362,8 +378,13 @@ ca.setVisible(false);
         });
         menuadministracion.add(jButton5);
 
-        jButton18.setText("Usuarios");
-        menuadministracion.add(jButton18);
+        btnusuarios.setText("Usuarios");
+        btnusuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnusuariosActionPerformed(evt);
+            }
+        });
+        menuadministracion.add(btnusuarios);
 
         javax.swing.GroupLayout desktopadminLayout = new javax.swing.GroupLayout(desktopadmin);
         desktopadmin.setLayout(desktopadminLayout);
@@ -465,19 +486,42 @@ paneladministracion.setVisible(true);
 b1.setVisible(true);
 rr1.setVisible(false);
 c1.setVisible(false);
+u1.setVisible(false);
+a1.setVisible(false);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 b1.setVisible(false);
 rr1.setVisible(true);
 c1.setVisible(false);
+u1.setVisible(false);
+a1.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
 b1.setVisible(false);
 rr1.setVisible(false);
+u1.setVisible(false);
+a1.setVisible(false);
 c1.setVisible(true);
     }//GEN-LAST:event_jButton15MouseClicked
+
+    private void btnarticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarticulosActionPerformed
+        b1.setVisible(false);
+        rr1.setVisible(false);
+        c1.setVisible(false);
+        u1.setVisible(false);
+        a1.setVisible(true);
+        
+    }//GEN-LAST:event_btnarticulosActionPerformed
+
+    private void btnusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuariosActionPerformed
+        b1.setVisible(false);
+        rr1.setVisible(false);
+        c1.setVisible(false);
+        u1.setVisible(true);
+        a1.setVisible(false);
+    }//GEN-LAST:event_btnusuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -519,17 +563,17 @@ c1.setVisible(true);
     private javax.swing.JLabel btnBodega;
     private javax.swing.JLabel btnInformes;
     private javax.swing.JLabel btnVentas;
+    private javax.swing.JButton btnarticulos;
+    private javax.swing.JButton btnusuarios;
     private javax.swing.JPanel desktopadmin;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
