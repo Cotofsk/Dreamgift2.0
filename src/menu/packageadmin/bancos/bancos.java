@@ -47,7 +47,7 @@ public class bancos extends javax.swing.JPanel {
     }
         
         
-private void ActualizarAutomaticamente (){
+public void ActualizarAutomaticamente (){
         
                
         DefaultTableModel modelo = (DefaultTableModel) tblBancos.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/

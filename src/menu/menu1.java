@@ -10,6 +10,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import menu.packageadmin.bancos.bancos;
 import menu.packageadmin.comunas.comunas;
+import menu.packageadmin.proveedores.proveedores;
 import menu.packageadmin.rrss.rrss;
 import menu.packageventas.venta;
 
@@ -24,6 +25,7 @@ public class menu1 extends javax.swing.JFrame {
     bancos b1;
     comunas c1;
     rrss rr1;
+    proveedores p1;
 
 
 /////desktop2/////
@@ -43,6 +45,7 @@ paneladministracion.setVisible(false);
 b1=new bancos();
 rr1=new rrss();
 c1=new comunas();
+p1=new proveedores();
 desktopadmin.setLayout(layout);
 GridBagConstraints c=new GridBagConstraints();
 c.gridx=0;
@@ -57,6 +60,7 @@ desktopadmin.add(c1,c);
 b1.setVisible(false);
 rr1.setVisible(false);
 c1.setVisible(false);
+p1.setVisible(false);
     }
 
     /** This method is called from within the constructor to
