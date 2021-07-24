@@ -43,7 +43,7 @@ public class bancos1 extends javax.swing.JFrame {
         return con;
     }
      
-        private void limpiarCajas(){
+    private void limpiarCajas(){
      
      txtNombreBanco.setText(null);
      txtCodigoBanco.setText(null);

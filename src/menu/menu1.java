@@ -12,6 +12,7 @@ import menu.packageadmin.articulos.articulos;
 import menu.packageadmin.bancos.bancos;
 import menu.packageadmin.categoriaarticulo.categoriaarticulo;
 import menu.packageadmin.comunas.comunas;
+import menu.packageadmin.proveedores.proveedor1;
 import menu.packageadmin.proveedores.proveedores;
 import menu.packageadmin.rrss.rrss;
 import menu.packageadmin.usuarios.usuarios;
@@ -115,7 +116,7 @@ ca.setVisible(false);
         jPanel2 = new javax.swing.JPanel();
         paneladministracion = new javax.swing.JPanel();
         menuadministracion = new javax.swing.JPanel();
-        jButton17 = new javax.swing.JButton();
+        btnProveedores = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
@@ -244,7 +245,7 @@ ca.setVisible(false);
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         menuventa.setBackground(new java.awt.Color(153, 153, 255));
@@ -321,7 +322,7 @@ ca.setVisible(false);
         panelinformes.setLayout(panelinformesLayout);
         panelinformesLayout.setHorizontalGroup(
             panelinformesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuinformes, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+            .addComponent(menuinformes, javax.swing.GroupLayout.DEFAULT_SIZE, 1027, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelinformesLayout.setVerticalGroup(
@@ -334,8 +335,13 @@ ca.setVisible(false);
 
         menuadministracion.setBackground(new java.awt.Color(153, 153, 255));
 
-        jButton17.setText("Proveedores");
-        menuadministracion.add(jButton17);
+        btnProveedores.setText("Proveedores");
+        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProveedoresActionPerformed(evt);
+            }
+        });
+        menuadministracion.add(btnProveedores);
 
         jButton16.setText("Packs");
         menuadministracion.add(jButton16);
@@ -446,7 +452,7 @@ ca.setVisible(false);
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
             .addComponent(panelprincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -488,6 +494,7 @@ rr1.setVisible(false);
 c1.setVisible(false);
 u1.setVisible(false);
 a1.setVisible(false);
+p1.setVisible(false);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -496,6 +503,7 @@ rr1.setVisible(true);
 c1.setVisible(false);
 u1.setVisible(false);
 a1.setVisible(false);
+p1.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
@@ -504,6 +512,7 @@ rr1.setVisible(false);
 u1.setVisible(false);
 a1.setVisible(false);
 c1.setVisible(true);
+p1.setVisible(false);
     }//GEN-LAST:event_jButton15MouseClicked
 
     private void btnarticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarticulosActionPerformed
@@ -512,7 +521,7 @@ c1.setVisible(true);
         c1.setVisible(false);
         u1.setVisible(false);
         a1.setVisible(true);
-        
+        p1.setVisible(false);
     }//GEN-LAST:event_btnarticulosActionPerformed
 
     private void btnusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuariosActionPerformed
@@ -521,7 +530,21 @@ c1.setVisible(true);
         c1.setVisible(false);
         u1.setVisible(true);
         a1.setVisible(false);
+        p1.setVisible(false);
     }//GEN-LAST:event_btnusuariosActionPerformed
+
+    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
+        
+     
+        
+        
+        b1.setVisible(false);
+        rr1.setVisible(false);
+        c1.setVisible(false);
+        u1.setVisible(false);
+        a1.setVisible(false);
+        p1.setVisible(true);
+    }//GEN-LAST:event_btnProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -562,6 +585,7 @@ c1.setVisible(true);
     private javax.swing.JLabel btnAdministracion;
     private javax.swing.JLabel btnBodega;
     private javax.swing.JLabel btnInformes;
+    private javax.swing.JButton btnProveedores;
     private javax.swing.JLabel btnVentas;
     private javax.swing.JButton btnarticulos;
     private javax.swing.JButton btnusuarios;
@@ -573,7 +597,6 @@ c1.setVisible(true);
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
