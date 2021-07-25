@@ -12,7 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static menu.packageadmin.proveedores.proveedores.ActualizarAutomaticamente;
+import static menu.packageadmin.proveedores.proveedores.ActualizarAutomaticamenteProv;
+import static menu.packageadmin.proveedores.proveedores.TablaProveedores;
 import static menu.packageadmin.proveedores.proveedores.txtidProveedor;
 
 
@@ -80,9 +81,9 @@ public class proveedor1 extends javax.swing.JFrame {
         txtRazonSocial = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
+        btnGuardarProv = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
+        btnActualizarProv = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -112,10 +113,10 @@ public class proveedor1 extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Email");
 
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarProv.setText("Guardar");
+        btnGuardarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                btnGuardarProvActionPerformed(evt);
             }
         });
 
@@ -126,10 +127,10 @@ public class proveedor1 extends javax.swing.JFrame {
             }
         });
 
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizarProv.setText("Actualizar");
+        btnActualizarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnActualizarProvActionPerformed(evt);
             }
         });
 
@@ -167,9 +168,9 @@ public class proveedor1 extends javax.swing.JFrame {
                             .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtRazonSocial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnActualizar)
+                                .addComponent(btnActualizarProv)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGuardar))))
+                                .addComponent(btnGuardarProv))))
                     .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
@@ -202,8 +203,8 @@ public class proveedor1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnActualizar))
+                    .addComponent(btnGuardarProv)
+                    .addComponent(btnActualizarProv))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -231,7 +232,7 @@ public class proveedor1 extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnGuardarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProvActionPerformed
         Connection con = null;
 
         try {
@@ -252,7 +253,7 @@ public class proveedor1 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Proveedor Guardado Exitosamente");
                 
                 limpiarCajas();
-                ActualizarAutomaticamente ();
+                ActualizarAutomaticamenteProv();
                 dispose();
                 
             } else {
@@ -266,9 +267,9 @@ public class proveedor1 extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println(e);
         }
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnGuardarProvActionPerformed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void btnActualizarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarProvActionPerformed
       
         
         Connection con = null;
@@ -279,18 +280,15 @@ public class proveedor1 extends javax.swing.JFrame {
             
             ps = con.prepareStatement("UPDATE proveedores SET rut_proveedor=?, razon_social=?, representante=?, fono=?, direccion=?, email=?,estado_pro=? WHERE id_proveedor=?");
 
-            
             ps.setString(1, txtRutEmpresa.getText());
             ps.setString(2, txtRazonSocial.getText());
             ps.setString(3, txtRepresentante.getText());
             ps.setString(4, txtTelefono.getText());
             ps.setString(5, txtDireccion.getText());
             ps.setString(6, txtEmail.getText());
-
-            
             ps.setString(7, cbxEstado.getSelectedItem().toString());
-
             ps.setString(8, txtidProveedor.getText());
+            
               
 
             int res = ps.executeUpdate();
@@ -298,7 +296,7 @@ public class proveedor1 extends javax.swing.JFrame {
             if (res > 0) {
                 JOptionPane.showMessageDialog(null, "Proveedor Modificado");
                 limpiarCajas();
-                ActualizarAutomaticamente();
+                ActualizarAutomaticamenteProv();
                 dispose ();
                 
                 
@@ -312,7 +310,7 @@ public class proveedor1 extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println(e);
         }
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    }//GEN-LAST:event_btnActualizarProvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,9 +348,9 @@ public class proveedor1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton btnActualizar;
+    public static javax.swing.JButton btnActualizarProv;
     private javax.swing.JButton btnCancelar;
-    public static javax.swing.JButton btnGuardar;
+    public static javax.swing.JButton btnGuardarProv;
     public static javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

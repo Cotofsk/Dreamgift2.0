@@ -8,7 +8,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static menu.packageadmin.articulos.articulos.ActualizarAutomaticamente;
 import static menu.packageadmin.articulos.articulos1.btnActualizar;
 import static menu.packageadmin.articulos.articulos1.btnGuardar;
 import static menu.packageadmin.articulos.articulos.TablaArticulos;
@@ -51,7 +50,7 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
 
     }
     
-    public static void ActualizarAutomaticamente (){
+    public static void ActualizarAutomaticamenteArt (){
         
                
         DefaultTableModel modelo = (DefaultTableModel) TablaArticulos.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
@@ -95,7 +94,7 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
     
     public articulos() {
         initComponents();
-        ActualizarAutomaticamente ();
+        ActualizarAutomaticamenteArt ();
     }
 
     /**
@@ -123,7 +122,7 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
         jLabel2.setText("Buscar");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabla Articulos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 16), new java.awt.Color(0, 0, 255))); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(969, 389));
+        jPanel1.setPreferredSize(new java.awt.Dimension(994, 9));
 
         TablaArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,14 +168,14 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
         );
 
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -230,12 +229,12 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
                         .addComponent(btnEditar)
                         .addGap(18, 18, 18)
                         .addComponent(btnNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 495, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,10 +250,8 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnEditar)
                             .addComponent(btnNuevo))
-                        .addGap(0, 17, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(0, 1, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

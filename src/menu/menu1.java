@@ -14,6 +14,7 @@ import menu.packageadmin.categoriaarticulo.categoriaarticulo;
 import menu.packageadmin.comunas.comunas;
 import menu.packageadmin.proveedores.proveedor1;
 import menu.packageadmin.proveedores.proveedores;
+import static menu.packageadmin.proveedores.proveedores.ActualizarAutomaticamenteProv;
 import menu.packageadmin.rrss.rrss;
 import menu.packageadmin.usuarios.usuarios;
 import menu.packageventas.venta;
@@ -76,6 +77,7 @@ p1.setVisible(false);
 a1.setVisible(false);
 u1.setVisible(false);
 ca.setVisible(false);
+
     }
 
     /** This method is called from within the constructor to

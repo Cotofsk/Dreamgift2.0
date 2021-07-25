@@ -9,8 +9,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static menu.packageadmin.proveedores.proveedor1.btnActualizar;
-import static menu.packageadmin.proveedores.proveedor1.btnGuardar;
 import static menu.packageadmin.proveedores.proveedor1.cbxEstado;
 import static menu.packageadmin.proveedores.proveedor1.txtDireccion;
 import static menu.packageadmin.proveedores.proveedor1.txtEmail;
@@ -18,10 +16,13 @@ import static menu.packageadmin.proveedores.proveedor1.txtRazonSocial;
 import static menu.packageadmin.proveedores.proveedor1.txtRepresentante;
 import static menu.packageadmin.proveedores.proveedor1.txtRutEmpresa;
 import static menu.packageadmin.proveedores.proveedor1.txtTelefono;
+import static menu.packageadmin.proveedores.proveedor1.btnGuardarProv;
+import static menu.packageadmin.proveedores.proveedor1.btnActualizarProv;
 
 
 public class proveedores extends javax.swing.JPanel {
     proveedor1 vp =new proveedor1();
+    
     
  
     
@@ -49,14 +50,22 @@ public class proveedores extends javax.swing.JPanel {
    
     public static void limpiarCajas(){
 
-    txtBuscar.setText(null);
+        txtBuscarProv.setText(null);
+        txtRutEmpresa.setText(null);
+        txtRazonSocial.setText(null);
+        txtRepresentante.setText(null);
+        txtDireccion.setText(null);
+        txtEmail.setText(null);
+        txtidProveedor.setText(null);
+        txtTelefono.setText(null);
 
     }
     
-    public static void ActualizarAutomaticamente (){
+    public static void ActualizarAutomaticamenteProv (){
         
                
         DefaultTableModel modelo = (DefaultTableModel) TablaProveedores.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
+   /*se necesita para ocultar la id de la tabla, este dato se necesita para la modificacion*/
         modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
         
         PreparedStatement ps; /*Declarar unas variables para hacer las transacciones*/
@@ -65,16 +74,22 @@ public class proveedores extends javax.swing.JPanel {
         int columnas;
         
         
-        int [] ancho = {30,80,60,7,90,90,25,25}; /*Arreglo con el ancho de las columnas*/
+        int [] ancho = {30,80,60,7,90,90,25,0}; /*Arreglo con el ancho de las columnas*/
         for  (int i = 0; i< TablaProveedores.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
-        TablaProveedores.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
+        TablaProveedores.getColumnModel().getColumn(7).setMaxWidth(0);
+        TablaProveedores.getColumnModel().getColumn(7).setMinWidth(0);
+        TablaProveedores.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+        TablaProveedores.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
+         TablaProveedores.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); //
+         btnEditarProv.setEnabled(false);
+        
              
         }   
         
         Connection con = null;
         try { 
             con = getConection();
-            ps= con.prepareStatement ("SELECT rut_proveedor,razon_social,representante,fono,direccion,email,estado_pro FROM proveedores");
+            ps= con.prepareStatement ("SELECT rut_proveedor,razon_social,representante,fono,direccion,email,estado_pro,id_proveedor FROM proveedores");
        
             rs= ps.executeQuery();
             rsmd = rs.getMetaData ();
@@ -87,18 +102,18 @@ public class proveedores extends javax.swing.JPanel {
                     filas[i] = rs.getObject(i + 1);
                 }
                 modelo.addRow(filas);
-                
+
             }
         } catch(SQLException e){
             JOptionPane.showMessageDialog(null, e.toString());
         }
-  
     }
    
     
     public proveedores() {
         initComponents();
-        ActualizarAutomaticamente ();
+        ActualizarAutomaticamenteProv ();
+  
       
     }
 
@@ -107,9 +122,9 @@ public class proveedores extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnNuevo = new javax.swing.JButton();
-        btneditar = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
+        btnNuevoProv = new javax.swing.JButton();
+        btnEditarProv = new javax.swing.JButton();
+        txtBuscarProv = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -120,30 +135,30 @@ public class proveedores extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(994, 512));
 
-        btnNuevo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNuevo.setText("Nuevo Proveedor");
-        btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnNuevoProv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNuevoProv.setText("Nuevo Proveedor");
+        btnNuevoProv.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnNuevoMouseClicked(evt);
+                btnNuevoProvMouseClicked(evt);
             }
         });
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevoProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-
-        btneditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btneditar.setText("Editar");
-        btneditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btneditarActionPerformed(evt);
+                btnNuevoProvActionPerformed(evt);
             }
         });
 
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarProv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditarProv.setText("Editar");
+        btnEditarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
+                btnEditarProvActionPerformed(evt);
+            }
+        });
+
+        txtBuscarProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarProvActionPerformed(evt);
             }
         });
 
@@ -179,37 +194,44 @@ public class proveedores extends javax.swing.JPanel {
 
         TablaProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Rut", "Razon Social", "Representante", "Telefono", "Dirección", "Email", "Estado"
+                "Rut", "Razon Social", "Representante", "Telefono", "Dirección", "Email", "Estado", "id_proveedor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         TablaProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -226,7 +248,7 @@ public class proveedores extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 929, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,6 +258,7 @@ public class proveedores extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txtidProveedor.setText("a");
         txtidProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtidProveedorActionPerformed(evt);
@@ -249,21 +272,20 @@ public class proveedores extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNuevo)
-                        .addGap(18, 18, 18)
-                        .addComponent(btneditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(115, 115, 115)
-                        .addComponent(jLabel2)
-                        .addGap(39, 39, 39)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addComponent(btnNuevoProv)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditarProv)
+                .addGap(304, 304, 304)
+                .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(168, 168, 168)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,34 +293,42 @@ public class proveedores extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBuscar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btneditar)
-                        .addComponent(btnNuevo)
-                        .addComponent(jLabel2)
-                        .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(btnEditarProv)
+                        .addComponent(btnNuevoProv)
+                        .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBuscarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+    private void btnNuevoProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoProvMouseClicked
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevoMouseClicked
+    }//GEN-LAST:event_btnNuevoProvMouseClicked
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+    private void btnNuevoProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProvActionPerformed
+        limpiarCajas();
         vp.setVisible(true);
-    }//GEN-LAST:event_btnNuevoActionPerformed
+        btnGuardarProv.setEnabled(true);
+        btnActualizarProv.setEnabled(false);
+    }//GEN-LAST:event_btnNuevoProvActionPerformed
 
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+    private void txtBuscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarProvActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
+    }//GEN-LAST:event_txtBuscarProvActionPerformed
 
     private void TablaProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProveedoresMouseClicked
         
+ 
+            
         int fila = TablaProveedores.getSelectedRow();
+        
+        
         
         txtRutEmpresa.setText(TablaProveedores.getValueAt(fila, 0).toString());    
         txtRazonSocial.setText(TablaProveedores.getValueAt(fila, 1).toString()); 
@@ -306,16 +336,20 @@ public class proveedores extends javax.swing.JPanel {
         txtTelefono.setText(TablaProveedores.getValueAt(fila, 3).toString());     
         txtDireccion.setText(TablaProveedores.getValueAt(fila, 4).toString());
         txtEmail.setText(TablaProveedores.getValueAt(fila, 5).toString());
-        cbxEstado.setSelectedItem(TablaProveedores.getValueAt(fila, 6).toString());
+        cbxEstado.setSelectedItem(TablaProveedores.getValueAt(fila, 6).toString());     
+        txtidProveedor.setText(TablaProveedores.getModel().getValueAt(TablaProveedores.getSelectedRow(),7).toString());
+        btnEditarProv.setEnabled(true);
         
+        
+
 
     }//GEN-LAST:event_TablaProveedoresMouseClicked
 
-    private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
+    private void btnEditarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProvActionPerformed
         vp.setVisible(true);
-        btnActualizar.setEnabled(true);
-        btnGuardar.setEnabled(false);
-    }//GEN-LAST:event_btneditarActionPerformed
+        btnActualizarProv.setEnabled(true);
+        btnGuardarProv.setEnabled(false);
+    }//GEN-LAST:event_btnEditarProvActionPerformed
 
     private void txtidProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidProveedorActionPerformed
         // TODO add your handling code here:
@@ -324,14 +358,14 @@ public class proveedores extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable TablaProveedores;
-    private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btneditar;
+    public static javax.swing.JButton btnEditarProv;
+    private javax.swing.JButton btnNuevoProv;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTextField txtBuscar;
+    public static javax.swing.JTextField txtBuscarProv;
     public static javax.swing.JTextField txtidProveedor;
     // End of variables declaration//GEN-END:variables
 }

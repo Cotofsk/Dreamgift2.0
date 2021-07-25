@@ -15,7 +15,7 @@ import static menu.packageadmin.articulos.articulos1.PASSWORD;
 import static menu.packageadmin.articulos.articulos1.URL;
 import static menu.packageadmin.articulos.articulos1.USERNAME;
 import static menu.packageadmin.articulos.articulos1.getConection;
-import static menu.packageadmin.articulos.articulos.ActualizarAutomaticamente;
+import static menu.packageadmin.articulos.articulos.ActualizarAutomaticamenteArt;
 
 /**
  *
@@ -210,7 +210,7 @@ public class articulos1 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Articulo Guardado Exitosamente");
                 
                 limpiarCajas();
-                ActualizarAutomaticamente ();
+                ActualizarAutomaticamenteArt ();
                 dispose();
                 
             } else {
@@ -254,7 +254,7 @@ Connection con = null;
             if (res > 0) {
                 JOptionPane.showMessageDialog(null, "Articulo Modificado");
                 limpiarCajas();
-                ActualizarAutomaticamente();
+                ActualizarAutomaticamenteArt();
                 dispose ();
                 
                 

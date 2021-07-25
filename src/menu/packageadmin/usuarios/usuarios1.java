@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static menu.packageadmin.proveedores.proveedores.ActualizarAutomaticamente;
+
 /**
  *
  * @author bsepu
