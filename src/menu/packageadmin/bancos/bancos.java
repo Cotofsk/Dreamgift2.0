@@ -15,6 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import menu.menu1;
+import static menu.packageadmin.bancos.bancos1.btnActualizarBanco;
+import static menu.packageadmin.bancos.bancos1.btnGuardarBanco;
+import static menu.packageadmin.bancos.bancos1.cbxEstadoBanco;
+import static menu.packageadmin.bancos.bancos1.txtCodigoBanco;
+import static menu.packageadmin.bancos.bancos1.txtNombreBanco;
 
 
 /**
@@ -22,7 +27,7 @@ import menu.menu1;
  * @author CotoF
  */
 public class bancos extends javax.swing.JPanel {
-    bancos1 vp=new bancos1();
+    bancos1 bancos1=new bancos1();
     
     public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
     public static final String USERNAME = "root"; //Usuario de Acceso a MySQL
@@ -47,10 +52,10 @@ public class bancos extends javax.swing.JPanel {
     }
         
         
-public void ActualizarAutomaticamente (){
+        public static void ActualizarAutomaticamenteBanco (){
         
                
-        DefaultTableModel modelo = (DefaultTableModel) tblBancos.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
+        DefaultTableModel modelo = (DefaultTableModel) TablaBanco.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
         modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
         
         PreparedStatement ps; /*Declarar unas variables para hacer las transacciones*/
@@ -59,16 +64,20 @@ public void ActualizarAutomaticamente (){
         int columnas;
         
         
-        int [] ancho = {30,80,60,7,90,90,25,25}; /*Arreglo con el ancho de las columnas*/
-        for  (int i = 0; i< tblBancos.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
-         tblBancos.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
+        int [] ancho = {30,80,60,0}; /*Arreglo con el ancho de las columnas*/
+        for  (int i = 0; i< TablaBanco.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
+        TablaBanco.getColumnModel().getColumn(3).setMaxWidth(0);
+        TablaBanco.getColumnModel().getColumn(3).setMinWidth(0);
+        TablaBanco.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
+        TablaBanco.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+        TablaBanco.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
              
         }   
         
         Connection con = null;
         try { 
             con = getConection();
-            ps= con.prepareStatement ("SELECT  codigo_banco, nom_banco ,estado FROM bancos");
+            ps= con.prepareStatement ("SELECT  codigo_banco,nom_banco,estado,id_banco FROM bancos");
        
             rs= ps.executeQuery();
             rsmd = rs.getMetaData ();
@@ -89,13 +98,19 @@ public void ActualizarAutomaticamente (){
   
     }
 
-                    
+        public static void limpiarCajasBanco(){
+
+        txtNombreBanco.setText(null);
+        txtCodigoBanco.setText(null);
+        
+
+    }                    
     /**
      * Creates new form bancos
      */
     public bancos() {
         initComponents();
-        ActualizarAutomaticamente ();
+        ActualizarAutomaticamenteBanco ();
 
     }
 
@@ -109,74 +124,101 @@ public void ActualizarAutomaticamente (){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblBancos = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnNuevoBanco = new javax.swing.JButton();
+        btnEditarBanco = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        txtidBanco = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaBanco = new javax.swing.JTable();
 
-        tblBancos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Codigo", "Nombre", "Estado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblBancos);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Bancos");
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Nuevo Banco");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnNuevoBanco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNuevoBanco.setText("Nuevo banco");
+        btnNuevoBanco.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnNuevoBancoMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevoBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNuevoBancoActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Modificar Banco");
+        btnEditarBanco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditarBanco.setText("Editar");
+        btnEditarBanco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarBancoMouseClicked(evt);
+            }
+        });
+
+        jPanel5.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel5.setPreferredSize(new java.awt.Dimension(102, 44));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Bancos");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        txtidBanco.setText("jTextField2");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Buscar");
+
+        TablaBanco.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombre ", "Codigo", "Estado", "Id_comuna"
+            }
+        ));
+        TablaBanco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaBancoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TablaBanco);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -185,62 +227,80 @@ public void ActualizarAutomaticamente (){
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 717, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnNuevoBanco)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditarBanco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtidBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(257, 257, 257)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(28, 28, 28))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(29, 29, 29))
+                    .addComponent(btnNuevoBanco)
+                    .addComponent(btnEditarBanco)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtidBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnNuevoBancoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoBancoMouseClicked
 
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoBancoMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-vp.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnNuevoBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoBancoActionPerformed
+        limpiarCajasBanco();
+        bancos1.setVisible(true);
+        btnGuardarBanco.setEnabled(true);
+        btnActualizarBanco.setEnabled(false);
+    }//GEN-LAST:event_btnNuevoBancoActionPerformed
+
+    private void btnEditarBancoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarBancoMouseClicked
+        bancos1.setVisible(true);
+        btnActualizarBanco.setEnabled(true);
+        btnGuardarBanco.setEnabled(false);
+    }//GEN-LAST:event_btnEditarBancoMouseClicked
+
+    private void TablaBancoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaBancoMouseClicked
+
+        int fila = TablaBanco.getSelectedRow();
+
+        txtNombreBanco.setText(TablaBanco.getValueAt(fila, 0).toString());
+        txtCodigoBanco.setText(TablaBanco.getValueAt(fila, 1).toString());
+        cbxEstadoBanco.setSelectedItem(TablaBanco.getValueAt(fila, 2).toString());
+        txtidBanco.setText(TablaBanco.getModel().getValueAt(TablaBanco.getSelectedRow(),3).toString());
+        btnEditarBanco.setEnabled(true);
+    }//GEN-LAST:event_TablaBancoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    public static javax.swing.JTable TablaBanco;
+    public static javax.swing.JButton btnEditarBanco;
+    public static javax.swing.JButton btnNuevoBanco;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tblBancos;
+    public static javax.swing.JTextField txtidBanco;
     // End of variables declaration//GEN-END:variables
 }

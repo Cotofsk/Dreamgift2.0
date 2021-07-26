@@ -1,4 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package menu.packageadmin.usuarios;
+
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,21 +13,16 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static menu.packageadmin.usuarios.usuarios1.btnActualizar;
-import static menu.packageadmin.usuarios.usuarios1.btnGuardar;
-import static menu.packageadmin.usuarios.usuarios1.cbxEstado;
-import static menu.packageadmin.usuarios.usuarios1.txtContraseña;
-import static menu.packageadmin.usuarios.usuarios1.txtNombre;
+import static menu.packageadmin.usuarios.usuarios1.btnGuardarUsuario;
+import static menu.packageadmin.usuarios.usuarios1.txtNombreUsuario;
+import static menu.packageadmin.usuarios.usuarios1.txtPassUsuario;
 
 /**
  *
- * @author bsepu
+ * @author CotoF
  */
 public class usuarios extends javax.swing.JPanel {
-    
-    usuarios1 us =new usuarios1();
-    
- 
+    usuarios1 usuarios1=new usuarios1();
     
     public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
     public static final String USERNAME = "root"; //Usuario de Acceso a MySQL
@@ -30,7 +31,7 @@ public class usuarios extends javax.swing.JPanel {
     PreparedStatement ps;
     ResultSet rs;
 
-    public static Connection getConection() {
+        public static Connection getConection() {
         Connection con = null;
 
         try {
@@ -43,18 +44,12 @@ public class usuarios extends javax.swing.JPanel {
             System.out.println(e);
         }
         return con;
-}
-   
-    public static void limpiarCajas(){
-
-    txtBuscar.setText(null);
-
     }
-    
-    public static void ActualizarAutomaticamente (){
+        
+               public static void ActualizarAutomaticamenteUsuario (){
         
                
-        DefaultTableModel modelo = (DefaultTableModel) TablaUsuarios.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
+        DefaultTableModel modelo = (DefaultTableModel) TablaUsuario.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
         modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
         
         PreparedStatement ps; /*Declarar unas variables para hacer las transacciones*/
@@ -63,16 +58,20 @@ public class usuarios extends javax.swing.JPanel {
         int columnas;
         
         
-        int [] ancho = {30,80,60,7,90,90,25,25}; /*Arreglo con el ancho de las columnas*/
-        for  (int i = 0; i< TablaUsuarios.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
-        TablaUsuarios.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
+        int [] ancho = {30,80,60,0}; /*Arreglo con el ancho de las columnas*/
+        for  (int i = 0; i< TablaUsuario.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
+        TablaUsuario.getColumnModel().getColumn(2).setMaxWidth(0);
+        TablaUsuario.getColumnModel().getColumn(2).setMinWidth(0);
+        TablaUsuario.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+        TablaUsuario.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+        TablaUsuario.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
              
         }   
         
         Connection con = null;
         try { 
             con = getConection();
-            ps= con.prepareStatement ("SELECT usuario, password, estado FROM usuarios");
+            ps= con.prepareStatement ("SELECT  usuario,password,id_usuario FROM usuarios");
        
             rs= ps.executeQuery();
             rsmd = rs.getMetaData ();
@@ -92,10 +91,21 @@ public class usuarios extends javax.swing.JPanel {
         }
   
     }
+               
+        public static void limpiarCajasUsuario(){
 
+        txtNombreUsuario.setText(null);
+        txtPassUsuario.setText(null);
+        
+
+    }             
+
+    /**
+     * Creates new form usuarios
+     */
     public usuarios() {
         initComponents();
-        ActualizarAutomaticamente ();
+        ActualizarAutomaticamenteUsuario();
     }
 
     /**
@@ -107,15 +117,67 @@ public class usuarios extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TablaUsuarios = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        txtBuscar = new javax.swing.JTextField();
+        btnNuevaComuna = new javax.swing.JButton();
+        btnEliminarUsuario = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        txtidusuario = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        btnNuevo = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaUsuario = new javax.swing.JTable();
 
-        TablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+        btnNuevaComuna.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNuevaComuna.setText("Nuevo usuario");
+        btnNuevaComuna.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevaComunaMouseClicked(evt);
+            }
+        });
+        btnNuevaComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaComunaActionPerformed(evt);
+            }
+        });
+
+        btnEliminarUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEliminarUsuario.setText("Eliminar");
+        btnEliminarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarUsuarioMouseClicked(evt);
+            }
+        });
+
+        jPanel5.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel5.setPreferredSize(new java.awt.Dimension(102, 44));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Usuarios");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        txtidusuario.setText("jTextField2");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Buscar");
+
+        TablaUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -141,39 +203,15 @@ public class usuarios extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Nombre Usuario", "Clave", "Estado"
+                "Nombre ", "Contraseña", "Id_usuario"
             }
         ));
-        TablaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaUsuariosMouseClicked(evt);
+                TablaUsuarioMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(TablaUsuarios);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Usuarios");
-
-        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Buscar");
-
-        btnNuevo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNuevo.setText("Nuevo Usuario");
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEditar.setText("Modificar Usuario");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(TablaUsuario);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -183,66 +221,69 @@ public class usuarios extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnNuevaComuna)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminarUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtidusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(198, 198, 198)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnEditar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnNuevo))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(13, 13, 13)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevo)
-                    .addComponent(btnEditar))
+                    .addComponent(btnNuevaComuna)
+                    .addComponent(btnEliminarUsuario)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtidusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-us.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevoActionPerformed
+    private void btnNuevaComunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaComunaMouseClicked
 
-    private void TablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaUsuariosMouseClicked
-int fila = TablaUsuarios.getSelectedRow();
-        
-        txtNombre.setText(TablaUsuarios.getValueAt(fila, 0).toString());    
-        txtContraseña.setText(TablaUsuarios.getValueAt(fila, 1).toString());  
-        cbxEstado.setSelectedItem(TablaUsuarios.getValueAt(fila, 2).toString());// TODO add your handling code here:
-    }//GEN-LAST:event_TablaUsuariosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaComunaMouseClicked
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        us.setVisible(true);
-        btnActualizar.setEnabled(true);
-        btnGuardar.setEnabled(false);        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarActionPerformed
+    private void btnNuevaComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaComunaActionPerformed
+        limpiarCajasUsuario();
+        usuarios1.setVisible(true);
+        btnGuardarUsuario.setEnabled(true);
+    }//GEN-LAST:event_btnNuevaComunaActionPerformed
+
+    private void btnEliminarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioMouseClicked
+
+    }//GEN-LAST:event_btnEliminarUsuarioMouseClicked
+
+    private void TablaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaUsuarioMouseClicked
+
+    }//GEN-LAST:event_TablaUsuarioMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTable TablaUsuarios;
-    public static javax.swing.JButton btnEditar;
-    public static javax.swing.JButton btnNuevo;
-    private javax.swing.JLabel jLabel1;
+    public static javax.swing.JTable TablaUsuario;
+    public static javax.swing.JButton btnEliminarUsuario;
+    public static javax.swing.JButton btnNuevaComuna;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtidusuario;
     // End of variables declaration//GEN-END:variables
 }

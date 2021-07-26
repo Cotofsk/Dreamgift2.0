@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static menu.packageadmin.proveedores.proveedores.ActualizarAutomaticamenteProv;
 import static menu.packageadmin.proveedores.proveedores.TablaProveedores;
+import static menu.packageadmin.proveedores.proveedores.limpiarCajasProv;
 import static menu.packageadmin.proveedores.proveedores.txtidProveedor;
 
 
@@ -46,15 +47,7 @@ public class proveedor1 extends javax.swing.JFrame {
         return con;
     }
     
-     private void limpiarCajas() {
-        
-        txtRutEmpresa.setText(null);
-        txtRepresentante.setText(null);
-        txtRazonSocial.setText(null);
-        txtDireccion.setText(null);
-        txtTelefono.setText(null);
-        txtEmail.setText(null);
-    }
+
      
     public proveedor1() {
         initComponents();
@@ -252,13 +245,13 @@ public class proveedor1 extends javax.swing.JFrame {
             if (res > 0) {
                 JOptionPane.showMessageDialog(null, "Proveedor Guardado Exitosamente");
                 
-                limpiarCajas();
+                limpiarCajasProv();
                 ActualizarAutomaticamenteProv();
                 dispose();
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Error al Guardar proveedor");
-                limpiarCajas();
+                limpiarCajasProv();
                 dispose();
             }
 
@@ -295,7 +288,7 @@ public class proveedor1 extends javax.swing.JFrame {
 
             if (res > 0) {
                 JOptionPane.showMessageDialog(null, "Proveedor Modificado");
-                limpiarCajas();
+                limpiarCajasProv();
                 ActualizarAutomaticamenteProv();
                 dispose ();
                 

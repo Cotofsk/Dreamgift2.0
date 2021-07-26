@@ -335,7 +335,7 @@ ca.setVisible(false);
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        menuadministracion.setBackground(new java.awt.Color(153, 153, 255));
+        menuadministracion.setBackground(new java.awt.Color(0, 102, 204));
 
         btnProveedores.setText("Proveedores");
         btnProveedores.addActionListener(new java.awt.event.ActionListener() {

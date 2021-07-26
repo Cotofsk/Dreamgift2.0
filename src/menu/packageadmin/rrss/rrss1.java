@@ -5,11 +5,42 @@
  */
 package menu.packageadmin.rrss;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import static menu.packageadmin.rrss.rrss.ActualizarAutomaticamenteRRSS;
+import static menu.packageadmin.rrss.rrss.limpiarCajasRRSS;
+import static menu.packageadmin.rrss.rrss.txtidRRSS;
+
 /**
  *
  * @author CotoF
  */
 public class rrss1 extends javax.swing.JFrame {
+    
+    public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
+    public static final String USERNAME = "root"; //Usuario de Acceso a MySQL
+    public static final String PASSWORD = ""; //Password del usuario
+    
+    PreparedStatement ps;
+    ResultSet rs;
+
+    public static Connection getConection() {
+        Connection con = null;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
+           // JOptionPane.showMessageDialog(null, "Conexion exitosa");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return con;
+    }
 
     /**
      * Creates new form rrss1
@@ -27,21 +58,188 @@ public class rrss1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNombreRRSS = new javax.swing.JTextField();
+        cbxEstadoRRSS = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtCodigoRRSS = new javax.swing.JTextField();
+        btnGuardarRRSS = new javax.swing.JButton();
+        btnCancelarRRSS = new javax.swing.JButton();
+        btnActualizarRRSS = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(799, 270));
+
+        jPanel1.setBackground(new java.awt.Color(251, 248, 248));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nueva red social", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 16), new java.awt.Color(0, 0, 204))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Nombre RRSS");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Estado");
+
+        cbxEstadoRRSS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activado", "Desactivado" }));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Codigo RRSS");
+
+        btnGuardarRRSS.setText("Guardar");
+        btnGuardarRRSS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarRRSSActionPerformed(evt);
+            }
+        });
+
+        btnCancelarRRSS.setText("Cancelar");
+        btnCancelarRRSS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarRRSSActionPerformed(evt);
+            }
+        });
+
+        btnActualizarRRSS.setText("Actualizar");
+        btnActualizarRRSS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarRRSSActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNombreRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCodigoRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbxEstadoRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelarRRSS)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnActualizarRRSS)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGuardarRRSS)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNombreRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCodigoRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxEstadoRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardarRRSS)
+                    .addComponent(btnActualizarRRSS)
+                    .addComponent(btnCancelarRRSS))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 236, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarRRSSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarRRSSActionPerformed
+        Connection con = null;
+
+        try {
+
+            con = getConection();
+            ps = con.prepareStatement("INSERT INTO redes (nombre,codigoRRSS,estado) VALUES(?,?,?)");
+            ps.setString(1, txtNombreRRSS.getText());
+            ps.setString(2, txtCodigoRRSS.getText());
+            ps.setString(3, cbxEstadoRRSS.getSelectedItem().toString());
+
+            int res = ps.executeUpdate();
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Red social guardada correctamente");
+
+                limpiarCajasRRSS();
+                ActualizarAutomaticamenteRRSS();
+                dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar nueva red social");
+                limpiarCajasRRSS();
+                dispose();
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_btnGuardarRRSSActionPerformed
+
+    private void btnCancelarRRSSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarRRSSActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarRRSSActionPerformed
+
+    private void btnActualizarRRSSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarRRSSActionPerformed
+
+        Connection con = null;
+
+        try {
+
+            con = getConection();
+
+            ps = con.prepareStatement("UPDATE redes SET nombre=?, codigoRRSS=?, estado=? WHERE idRedes=?");
+
+            ps.setString(1, txtNombreRRSS.getText());
+            ps.setString(2, txtCodigoRRSS.getText());
+            ps.setString(3, cbxEstadoRRSS.getSelectedItem().toString());
+            ps.setString(4, txtidRRSS.getText());
+
+            int res = ps.executeUpdate();
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Red social modificada");
+                limpiarCajasRRSS();
+                ActualizarAutomaticamenteRRSS();
+                dispose ();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al modificar la red social");
+
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_btnActualizarRRSSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +277,15 @@ public class rrss1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnActualizarRRSS;
+    private javax.swing.JButton btnCancelarRRSS;
+    public static javax.swing.JButton btnGuardarRRSS;
+    public static javax.swing.JComboBox<String> cbxEstadoRRSS;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    public static javax.swing.JTextField txtCodigoRRSS;
+    public static javax.swing.JTextField txtNombreRRSS;
     // End of variables declaration//GEN-END:variables
 }

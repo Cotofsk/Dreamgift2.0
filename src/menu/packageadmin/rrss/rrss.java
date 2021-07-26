@@ -5,17 +5,110 @@
  */
 package menu.packageadmin.rrss;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static menu.packageadmin.rrss.rrss1.btnActualizarRRSS;
+import static menu.packageadmin.rrss.rrss1.btnGuardarRRSS;
+import static menu.packageadmin.rrss.rrss1.cbxEstadoRRSS;
+import static menu.packageadmin.rrss.rrss1.txtCodigoRRSS;
+import static menu.packageadmin.rrss.rrss1.txtNombreRRSS;
+
 /**
  *
  * @author CotoF
  */
 public class rrss extends javax.swing.JPanel {
+        rrss1 rrss1 =new rrss1();
 
+    public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
+    public static final String USERNAME = "root"; //Usuario de Acceso a MySQL
+    public static final String PASSWORD = ""; //Password del usuario
+    
+    PreparedStatement ps;
+    ResultSet rs;
+
+    public static Connection getConection() {
+        Connection con = null;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
+           // JOptionPane.showMessageDialog(null, "Conexion exitosa");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return con;
+    }
+
+        public static void limpiarCajasRRSS(){
+
+        txtNombreRRSS.setText(null);
+        txtCodigoRRSS.setText(null);
+        
+
+    }
+
+        public static void ActualizarAutomaticamenteRRSS (){
+        
+               
+        DefaultTableModel modelo = (DefaultTableModel) TablaRRSS.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
+   /*se necesita para ocultar la id de la tabla, este dato se necesita para la modificacion*/
+        modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
+        
+        PreparedStatement ps; /*Declarar unas variables para hacer las transacciones*/
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        
+        
+        int [] ancho = {30,80,60,0}; /*Arreglo con el ancho de las columnas*/
+        for  (int i = 0; i< TablaRRSS.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
+        TablaRRSS.getColumnModel().getColumn(3).setMaxWidth(0);
+        TablaRRSS.getColumnModel().getColumn(3).setMinWidth(0);
+        TablaRRSS.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
+        TablaRRSS.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+        TablaRRSS.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
+        btnEditarRRSS.setEnabled(false);
+        
+             
+        }   
+        
+        Connection con = null;
+        try { 
+            con = getConection();
+            ps= con.prepareStatement ("SELECT nombre,codigoRRSS,estado,idRedes FROM redes");
+       
+            rs= ps.executeQuery();
+            rsmd = rs.getMetaData ();
+            columnas = rsmd.getColumnCount(); /*Cuantas Columnas trae esta consulta*/
+            
+            
+            while(rs.next()){ /*Extraer todo los datos de la consulta*/
+               Object[] filas = new Object[columnas];
+                for (int i = 0; i < columnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+
+            }
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
     /**
      * Creates new form rrss
      */
     public rrss() {
         initComponents();
+        ActualizarAutomaticamenteRRSS();
     }
 
     /**
@@ -27,32 +120,38 @@ public class rrss extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnEditarRRSS = new javax.swing.JButton();
+        btnNuevoRRSS = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaRRSS = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        txtidRRSS = new javax.swing.JTextField();
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Modificar red social");
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Nueva red social");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEditarRRSS.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditarRRSS.setText("Editar");
+        btnEditarRRSS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEditarRRSSMouseClicked(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnNuevoRRSS.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNuevoRRSS.setText("Nueva red social");
+        btnNuevoRRSS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoRRSSMouseClicked(evt);
+            }
+        });
+        btnNuevoRRSS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoRRSSActionPerformed(evt);
+            }
+        });
+
+        TablaRRSS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,10 +177,15 @@ public class rrss extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre ", "Codigo", "Estado", "Id_RRSS"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        TablaRRSS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaRRSSMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TablaRRSS);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Buscar");
@@ -110,6 +214,8 @@ public class rrss extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txtidRRSS.setText("a");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,9 +227,11 @@ public class rrss extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnNuevoRRSS)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btnEditarRRSS)
+                        .addGap(142, 142, 142)
+                        .addComponent(txtidRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -138,8 +246,9 @@ public class rrss extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton1))
+                        .addComponent(btnEditarRRSS)
+                        .addComponent(btnNuevoRRSS)
+                        .addComponent(txtidRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)))
@@ -149,32 +258,45 @@ public class rrss extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnNuevoRRSSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoRRSSMouseClicked
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnNuevoRRSSMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnNuevoRRSSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoRRSSActionPerformed
+        limpiarCajasRRSS();
+        rrss1.setVisible(true);
+        btnGuardarRRSS.setEnabled(true);
+        btnActualizarRRSS.setEnabled(false);
+    }//GEN-LAST:event_btnNuevoRRSSActionPerformed
+
+    private void TablaRRSSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRRSSMouseClicked
+                     
+        int fila = TablaRRSS.getSelectedRow();
+                        
+        txtNombreRRSS.setText(TablaRRSS.getValueAt(fila, 0).toString());    
+        txtCodigoRRSS.setText(TablaRRSS.getValueAt(fila, 1).toString()); 
+        cbxEstadoRRSS.setSelectedItem(TablaRRSS.getValueAt(fila, 2).toString());
+        txtidRRSS.setText(TablaRRSS.getModel().getValueAt(TablaRRSS.getSelectedRow(),3).toString());
+        btnEditarRRSS.setEnabled(true);
+    }//GEN-LAST:event_TablaRRSSMouseClicked
+
+    private void btnEditarRRSSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarRRSSMouseClicked
+        rrss1.setVisible(true);
+        btnActualizarRRSS.setEnabled(true);
+        btnGuardarRRSS.setEnabled(false);
+    }//GEN-LAST:event_btnEditarRRSSMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public static javax.swing.JTable TablaRRSS;
+    public static javax.swing.JButton btnEditarRRSS;
+    public static javax.swing.JButton btnNuevoRRSS;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField txtidRRSS;
     // End of variables declaration//GEN-END:variables
 }

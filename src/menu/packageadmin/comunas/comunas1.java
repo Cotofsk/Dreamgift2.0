@@ -5,17 +5,49 @@
  */
 package menu.packageadmin.comunas;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import static menu.packageadmin.comunas.comunas.ActualizarAutomaticamenteComuna;
+import static menu.packageadmin.comunas.comunas.limpiarCajasComuna;
+import static menu.packageadmin.comunas.comunas.txtidComuna;
+
 /**
  *
  * @author CotoF
  */
 public class comunas1 extends javax.swing.JFrame {
 
+    
+        public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
+        public static final String USERNAME = "root"; //Usuario de Acceso a MySQL
+        public static final String PASSWORD = ""; //Password del usuario
+    
+        PreparedStatement ps;
+        ResultSet rs;
+
+        public static Connection getConection() {
+        Connection con = null;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
+           // JOptionPane.showMessageDialog(null, "Conexion exitosa");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return con;
+    }
     /**
      * Creates new form comunas1
      */
     public comunas1() {
         initComponents();
+
     }
 
     /**
@@ -27,21 +59,185 @@ public class comunas1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNombreComuna = new javax.swing.JTextField();
+        cbxEstadoComuna = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtCodigoComuna = new javax.swing.JTextField();
+        btnGuardarComuna = new javax.swing.JButton();
+        btnCancelarComuna = new javax.swing.JButton();
+        btnActualizarComuna = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(251, 248, 248));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nueva comuna", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 16), new java.awt.Color(0, 0, 204))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Nombre comuna");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Estado");
+
+        cbxEstadoComuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activado", "Desactivado" }));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Codigo RRSS");
+
+        btnGuardarComuna.setText("Guardar");
+        btnGuardarComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarComunaActionPerformed(evt);
+            }
+        });
+
+        btnCancelarComuna.setText("Cancelar");
+        btnCancelarComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarComunaActionPerformed(evt);
+            }
+        });
+
+        btnActualizarComuna.setText("Actualizar");
+        btnActualizarComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarComunaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNombreComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCodigoComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxEstadoComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 80, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelarComuna)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnActualizarComuna)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGuardarComuna)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNombreComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCodigoComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxEstadoComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardarComuna)
+                    .addComponent(btnActualizarComuna)
+                    .addComponent(btnCancelarComuna))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComunaActionPerformed
+        Connection con = null;
+
+        try {
+
+            con = getConection();
+            ps = con.prepareStatement("INSERT INTO comunas (comuna,codigo_comuna,estado) VALUES(?,?,?)");
+            ps.setString(1, txtNombreComuna.getText());
+            ps.setString(2, txtCodigoComuna.getText());
+            ps.setString(3, cbxEstadoComuna.getSelectedItem().toString());
+
+            int res = ps.executeUpdate();
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Comuna guardada correctamente");
+
+                limpiarCajasComuna();
+                ActualizarAutomaticamenteComuna();
+                dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar nueva comuna");
+                limpiarCajasComuna();
+                dispose();
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_btnGuardarComunaActionPerformed
+
+    private void btnCancelarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarComunaActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarComunaActionPerformed
+
+    private void btnActualizarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarComunaActionPerformed
+
+        Connection con = null;
+
+        try {
+
+            con = getConection();
+
+            ps = con.prepareStatement("UPDATE comunas SET comuna=?, codigo_comuna=?, estado=? WHERE id_comuna=?");
+
+            ps.setString(1, txtNombreComuna.getText());
+            ps.setString(2, txtCodigoComuna.getText());
+            ps.setString(3, cbxEstadoComuna.getSelectedItem().toString());
+            ps.setString(4, txtidComuna.getText());
+
+            int res = ps.executeUpdate();
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Comuna modificada");
+                limpiarCajasComuna();
+                ActualizarAutomaticamenteComuna();
+                dispose ();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al modificar la comuna");
+
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_btnActualizarComunaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +275,15 @@ public class comunas1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnActualizarComuna;
+    private javax.swing.JButton btnCancelarComuna;
+    public static javax.swing.JButton btnGuardarComuna;
+    public static javax.swing.JComboBox<String> cbxEstadoComuna;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    public static javax.swing.JTextField txtCodigoComuna;
+    public static javax.swing.JTextField txtNombreComuna;
     // End of variables declaration//GEN-END:variables
 }

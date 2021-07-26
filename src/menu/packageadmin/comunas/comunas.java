@@ -5,17 +5,113 @@
  */
 package menu.packageadmin.comunas;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static menu.packageadmin.comunas.comunas1.btnActualizarComuna;
+import static menu.packageadmin.comunas.comunas1.btnGuardarComuna;
+import static menu.packageadmin.comunas.comunas1.cbxEstadoComuna;
+import static menu.packageadmin.comunas.comunas1.txtCodigoComuna;
+import static menu.packageadmin.comunas.comunas1.txtNombreComuna;
+
 /**
  *
  * @author CotoF
  */
 public class comunas extends javax.swing.JPanel {
+    
+        comunas1 comunas1 =new comunas1();
+        public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
+        public static final String USERNAME = "root"; //Usuario de Acceso a MySQL
+        public static final String PASSWORD = ""; //Password del usuario
+    
+        PreparedStatement ps;
+        ResultSet rs;
 
+        public static Connection getConection() {
+        Connection con = null;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
+           // JOptionPane.showMessageDialog(null, "Conexion exitosa");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return con;
+    }
+
+        public static void limpiarCajasComuna(){
+
+        txtNombreComuna.setText(null);
+        txtCodigoComuna.setText(null);
+        
+
+    }
+
+        
+
+         
+        public static void ActualizarAutomaticamenteComuna (){
+        
+               
+        DefaultTableModel modelo = (DefaultTableModel) TablaComuna.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
+   /*se necesita para ocultar la id de la tabla, este dato se necesita para la modificacion*/
+        modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
+        
+        PreparedStatement ps; /*Declarar unas variables para hacer las transacciones*/
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        
+        
+        int [] ancho = {30,80,60,0}; /*Arreglo con el ancho de las columnas*/
+        for  (int i = 0; i< TablaComuna.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
+        TablaComuna.getColumnModel().getColumn(3).setMaxWidth(0);
+        TablaComuna.getColumnModel().getColumn(3).setMinWidth(0);
+        TablaComuna.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
+        TablaComuna.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+        TablaComuna.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
+        btnEditarComuna.setEnabled(false);
+        
+             
+        }   
+        
+        Connection con = null;
+        try { 
+            con = getConection();
+            ps= con.prepareStatement ("SELECT comuna,codigo_comuna,estado,id_comuna FROM comunas");
+       
+            rs= ps.executeQuery();
+            rsmd = rs.getMetaData ();
+            columnas = rsmd.getColumnCount(); /*Cuantas Columnas trae esta consulta*/
+            
+            
+            while(rs.next()){ /*Extraer todo los datos de la consulta*/
+               Object[] filas = new Object[columnas];
+                for (int i = 0; i < columnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+
+            }
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
     /**
      * Creates new form comunas
      */
     public comunas() {
         initComponents();
+        ActualizarAutomaticamenteComuna();
     }
 
     /**
@@ -27,18 +123,38 @@ public class comunas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        btnNuevaComuna = new javax.swing.JButton();
+        btnEditarComuna = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaComuna = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        txtidComuna = new javax.swing.JTextField();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Comunas");
+        btnNuevaComuna.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNuevaComuna.setText("Nueva comuna");
+        btnNuevaComuna.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevaComunaMouseClicked(evt);
+            }
+        });
+        btnNuevaComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaComunaActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnEditarComuna.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditarComuna.setText("Editar");
+        btnEditarComuna.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarComunaMouseClicked(evt);
+            }
+        });
+
+        TablaComuna.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,29 +180,44 @@ public class comunas extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre ", "Codigo", "Estado", "Id_comuna"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        TablaComuna.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaComunaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TablaComuna);
+
+        jPanel5.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel5.setPreferredSize(new java.awt.Dimension(102, 44));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Comunas");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Buscar");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Modificar comuna");
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Nueva comuna");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        txtidComuna.setText("jTextField2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,62 +226,80 @@ public class comunas extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 717, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnNuevaComuna)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                        .addComponent(btnEditarComuna)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtidComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(198, 198, 198)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(28, 28, 28))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(29, 29, 29))
+                    .addComponent(btnNuevaComuna)
+                    .addComponent(btnEditarComuna)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtidComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnNuevaComunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaComunaMouseClicked
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnNuevaComunaMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnNuevaComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaComunaActionPerformed
+        limpiarCajasComuna();
+        comunas1.setVisible(true);
+        btnGuardarComuna.setEnabled(true);
+        btnActualizarComuna.setEnabled(false);
+    }//GEN-LAST:event_btnNuevaComunaActionPerformed
+
+    private void btnEditarComunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarComunaMouseClicked
+        comunas1.setVisible(true);
+        btnActualizarComuna.setEnabled(true);
+        btnGuardarComuna.setEnabled(false);
+    }//GEN-LAST:event_btnEditarComunaMouseClicked
+
+    private void TablaComunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaComunaMouseClicked
+
+        int fila = TablaComuna.getSelectedRow();
+
+        txtNombreComuna.setText(TablaComuna.getValueAt(fila, 0).toString());
+        txtCodigoComuna.setText(TablaComuna.getValueAt(fila, 1).toString());
+        cbxEstadoComuna.setSelectedItem(TablaComuna.getValueAt(fila, 2).toString());
+        txtidComuna.setText(TablaComuna.getModel().getValueAt(TablaComuna.getSelectedRow(),3).toString());
+        btnEditarComuna.setEnabled(true);
+    }//GEN-LAST:event_TablaComunaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    public static javax.swing.JTable TablaComuna;
+    public static javax.swing.JButton btnEditarComuna;
+    public static javax.swing.JButton btnNuevaComuna;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField txtidComuna;
     // End of variables declaration//GEN-END:variables
 }

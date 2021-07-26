@@ -424,7 +424,7 @@
             <Container class="javax.swing.JPanel" name="menuadministracion">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="99" red="99" type="rgb"/>
+                  <Color blue="cc" green="66" red="0" type="rgb"/>
                 </Property>
               </Properties>
 
