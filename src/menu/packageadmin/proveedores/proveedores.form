@@ -172,8 +172,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="929" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -199,13 +199,13 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="8" rowCount="20">
-                    <Column editable="true" title="Rut" type="java.lang.Integer"/>
-                    <Column editable="true" title="Razon Social" type="java.lang.String"/>
-                    <Column editable="true" title="Representante" type="java.lang.String"/>
-                    <Column editable="true" title="Telefono" type="java.lang.String"/>
-                    <Column editable="true" title="Direcci&#xf3;n" type="java.lang.String"/>
-                    <Column editable="true" title="Email" type="java.lang.String"/>
-                    <Column editable="true" title="Estado" type="java.lang.String"/>
+                    <Column editable="false" title="Rut" type="java.lang.Integer"/>
+                    <Column editable="false" title="Razon Social" type="java.lang.String"/>
+                    <Column editable="false" title="Representante" type="java.lang.String"/>
+                    <Column editable="false" title="Telefono" type="java.lang.String"/>
+                    <Column editable="false" title="Direcci&#xf3;n" type="java.lang.String"/>
+                    <Column editable="false" title="Email" type="java.lang.String"/>
+                    <Column editable="false" title="Estado" type="java.lang.String"/>
                     <Column editable="false" title="id_proveedor" type="java.lang.String"/>
                   </Table>
                 </Property>

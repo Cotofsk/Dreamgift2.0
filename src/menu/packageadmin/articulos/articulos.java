@@ -224,11 +224,11 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEditar)
-                        .addGap(18, 18, 18)
                         .addComponent(btnNuevo)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,12 +255,6 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-    art.setVisible(true);
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
     private void TablaArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaArticulosMouseClicked
         int fila = TablaArticulos.getSelectedRow();
         
@@ -268,6 +262,12 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
         txtCodigo.setText(TablaArticulos.getValueAt(fila, 1).toString());
         cbxCategoria.setSelectedItem(TablaArticulos.getValueAt(fila, 2).toString());        // TODO add your handling code here:
     }//GEN-LAST:event_TablaArticulosMouseClicked
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        art.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         art.setVisible(true);

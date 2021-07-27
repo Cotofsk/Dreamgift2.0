@@ -12,9 +12,7 @@ import menu.packageadmin.articulos.articulos;
 import menu.packageadmin.bancos.bancos;
 import menu.packageadmin.categoriaarticulo.categoriaarticulo;
 import menu.packageadmin.comunas.comunas;
-import menu.packageadmin.proveedores.proveedor1;
 import menu.packageadmin.proveedores.proveedores;
-import static menu.packageadmin.proveedores.proveedores.ActualizarAutomaticamenteProv;
 import menu.packageadmin.rrss.rrss;
 import menu.packageadmin.usuarios.usuarios;
 import menu.packageventas.venta;
@@ -33,7 +31,7 @@ public class menu1 extends javax.swing.JFrame {
     proveedores p1;
     articulos a1;
     usuarios u1;
-    categoriaarticulo ca ;
+    categoriaarticulo ca;
     
 
 
@@ -368,6 +366,11 @@ ca.setVisible(false);
         menuadministracion.add(btnarticulos);
 
         jButton13.setText("Categoria articulos");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
         menuadministracion.add(jButton13);
 
         jButton11.setText("RRSS");
@@ -506,6 +509,7 @@ c1.setVisible(false);
 u1.setVisible(false);
 a1.setVisible(false);
 p1.setVisible(false);
+ca.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
@@ -515,6 +519,7 @@ u1.setVisible(false);
 a1.setVisible(false);
 c1.setVisible(true);
 p1.setVisible(false);
+ca.setVisible(false);
     }//GEN-LAST:event_jButton15MouseClicked
 
     private void btnarticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarticulosActionPerformed
@@ -524,6 +529,7 @@ p1.setVisible(false);
         u1.setVisible(false);
         a1.setVisible(true);
         p1.setVisible(false);
+        ca.setVisible(false);
     }//GEN-LAST:event_btnarticulosActionPerformed
 
     private void btnusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuariosActionPerformed
@@ -533,20 +539,28 @@ p1.setVisible(false);
         u1.setVisible(true);
         a1.setVisible(false);
         p1.setVisible(false);
+        ca.setVisible(false);
     }//GEN-LAST:event_btnusuariosActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
-        
-     
-        
-        
         b1.setVisible(false);
         rr1.setVisible(false);
         c1.setVisible(false);
         u1.setVisible(false);
         a1.setVisible(false);
         p1.setVisible(true);
+        ca.setVisible(false);
     }//GEN-LAST:event_btnProveedoresActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        b1.setVisible(false);
+        rr1.setVisible(false);
+        c1.setVisible(false);
+        u1.setVisible(false);
+        a1.setVisible(false);
+        p1.setVisible(false);
+        ca.setVisible(true);
+    }//GEN-LAST:event_jButton13ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -284,6 +284,6 @@ public class usuarios extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField txtidusuario;
+    public static javax.swing.JTextField txtidusuario;
     // End of variables declaration//GEN-END:variables
 }

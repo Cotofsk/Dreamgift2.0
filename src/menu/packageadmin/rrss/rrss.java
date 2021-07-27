@@ -48,13 +48,13 @@ public class rrss extends javax.swing.JPanel {
         return con;
     }
 
-        public static void limpiarCajasRRSS(){
+      public static void limpiarCajasRRSS(){
 
         txtNombreRRSS.setText(null);
         txtCodigoRRSS.setText(null);
         
 
-    }
+    }  
 
         public static void ActualizarAutomaticamenteRRSS (){
         
