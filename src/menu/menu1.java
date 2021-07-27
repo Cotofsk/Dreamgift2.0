@@ -70,6 +70,7 @@ desktopadmin.add(a1,c);
 desktopadmin.add(u1,c);
 desktopadmin.add(p1,c);
 desktopadmin.add(ca,c);
+desktopadmin.add(cap,c);
 b1.setVisible(false);
 rr1.setVisible(false);
 c1.setVisible(false);
