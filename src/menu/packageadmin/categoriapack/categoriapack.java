@@ -84,7 +84,7 @@ public class categoriapack extends javax.swing.JPanel {
         Connection con = null;
         try { 
             con = getConection();
-            ps= con.prepareStatement ("SELECT catarticulo,codigo,estado,id_categoria FROM categorias");
+            ps= con.prepareStatement ("SELECT tipo_evento,codigo,estado,id_tipo_evento FROM tipo_eventos");
        
             rs= ps.executeQuery();
             rsmd = rs.getMetaData ();

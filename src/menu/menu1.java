@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import menu.packageadmin.articulos.articulos;
 import menu.packageadmin.bancos.bancos;
 import menu.packageadmin.categoriaarticulo.categoriaarticulo;
+import menu.packageadmin.categoriapack.categoriapack;
 import menu.packageadmin.comunas.comunas;
 import menu.packageadmin.proveedores.proveedores;
 import menu.packageadmin.rrss.rrss;
@@ -32,7 +33,7 @@ public class menu1 extends javax.swing.JFrame {
     articulos a1;
     usuarios u1;
     categoriaarticulo ca;
-    
+    categoriapack cap;
 
 
 /////desktop2/////
@@ -56,6 +57,7 @@ p1=new proveedores();
 a1=new articulos();
 u1=new usuarios();
 ca=new categoriaarticulo();
+cap=new categoriapack();
 
 desktopadmin.setLayout(layout);
 GridBagConstraints c=new GridBagConstraints();
@@ -75,6 +77,7 @@ p1.setVisible(false);
 a1.setVisible(false);
 u1.setVisible(false);
 ca.setVisible(false);
+cap.setVisible(false);
 
     }
 
@@ -347,6 +350,11 @@ ca.setVisible(false);
         menuadministracion.add(jButton16);
 
         jButton14.setText("Categoria pack");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
         menuadministracion.add(jButton14);
 
         jButton15.setText("Comunas");
@@ -500,6 +508,7 @@ c1.setVisible(false);
 u1.setVisible(false);
 a1.setVisible(false);
 p1.setVisible(false);
+cap.setVisible(false);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -510,6 +519,7 @@ u1.setVisible(false);
 a1.setVisible(false);
 p1.setVisible(false);
 ca.setVisible(false);
+cap.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
@@ -520,6 +530,7 @@ a1.setVisible(false);
 c1.setVisible(true);
 p1.setVisible(false);
 ca.setVisible(false);
+cap.setVisible(false);
     }//GEN-LAST:event_jButton15MouseClicked
 
     private void btnarticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarticulosActionPerformed
@@ -530,6 +541,7 @@ ca.setVisible(false);
         a1.setVisible(true);
         p1.setVisible(false);
         ca.setVisible(false);
+        cap.setVisible(false);
     }//GEN-LAST:event_btnarticulosActionPerformed
 
     private void btnusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuariosActionPerformed
@@ -540,6 +552,7 @@ ca.setVisible(false);
         a1.setVisible(false);
         p1.setVisible(false);
         ca.setVisible(false);
+        cap.setVisible(false);
     }//GEN-LAST:event_btnusuariosActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
@@ -550,6 +563,7 @@ ca.setVisible(false);
         a1.setVisible(false);
         p1.setVisible(true);
         ca.setVisible(false);
+        cap.setVisible(false);
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -560,7 +574,19 @@ ca.setVisible(false);
         a1.setVisible(false);
         p1.setVisible(false);
         ca.setVisible(true);
+        cap.setVisible(false);
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        b1.setVisible(false);
+        rr1.setVisible(false);
+        c1.setVisible(false);
+        u1.setVisible(false);
+        a1.setVisible(false);
+        p1.setVisible(false);
+        ca.setVisible(false);
+        cap.setVisible(true);
+    }//GEN-LAST:event_jButton14ActionPerformed
 
     /**
      * @param args the command line arguments

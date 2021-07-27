@@ -174,7 +174,7 @@ public class categoriapack1 extends javax.swing.JFrame {
         try {
 
             con = getConection();
-            ps = con.prepareStatement("INSERT INTO categorias (catarticulo,codigo,estado) VALUES(?,?,?)");
+            ps = con.prepareStatement("INSERT INTO tipo_eventos (tipo_evento,codigo,estado) VALUES(?,?,?)");
             ps.setString(1, txtNombreCatPacks.getText());
             ps.setString(2, txtCodigoCatPacks.getText());
             ps.setString(3, cbxEstadoCatPacks.getSelectedItem().toString());
@@ -182,14 +182,14 @@ public class categoriapack1 extends javax.swing.JFrame {
             int res = ps.executeUpdate();
 
             if (res > 0) {
-                JOptionPane.showMessageDialog(null, "Categoria de articulo guardada correctamente");
+                JOptionPane.showMessageDialog(null, "Categoria de packs guardada correctamente");
 
                 limpiarCajasCatPacks();
                 ActualizarAutomaticamenteCatPacks();
                 dispose();
 
             } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar nueva categoria de articulo");
+                JOptionPane.showMessageDialog(null, "Error al guardar nueva categoria de packs");
                 limpiarCajasCatPacks();
                 dispose();
             }
@@ -213,7 +213,7 @@ public class categoriapack1 extends javax.swing.JFrame {
 
             con = getConection();
 
-            ps = con.prepareStatement("UPDATE categorias SET catarticulo=?, codigo=?, estado=? WHERE id_categoria=?");
+            ps = con.prepareStatement("UPDATE tipo_eventos SET tipo_evento=?, codigo=?, estado=? WHERE id_tipo_evento=?");
 
             ps.setString(1, txtNombreCatPacks.getText());
             ps.setString(2, txtCodigoCatPacks.getText());
@@ -223,13 +223,13 @@ public class categoriapack1 extends javax.swing.JFrame {
             int res = ps.executeUpdate();
 
             if (res > 0) {
-                JOptionPane.showMessageDialog(null, "Categoria de articulo modificada");
+                JOptionPane.showMessageDialog(null, "Categoria de packs modificada");
                 limpiarCajasCatPacks();
-                ActualizarAutomaticamenteCatArticulo();
+                ActualizarAutomaticamenteCatPacks();
                 dispose ();
 
             } else {
-                JOptionPane.showMessageDialog(null, "Error al modificar la categoria de articulo");
+                JOptionPane.showMessageDialog(null, "Error al modificar la categoria de packs");
 
             }
 
