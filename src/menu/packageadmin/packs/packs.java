@@ -103,8 +103,7 @@ public class packs extends javax.swing.JPanel {
      * Creates new form packs
      */
     public packs() {
-        initComponents();
-    }
+        initComponents();    }
 
     /**
      * This method is called from within the constructor to initialize the form.
