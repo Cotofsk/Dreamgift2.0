@@ -17,6 +17,7 @@ import menu.packageadmin.proveedores.proveedores;
 import menu.packageadmin.rrss.rrss;
 import menu.packageadmin.usuarios.usuarios;
 import menu.packageventas.venta;
+import menu.packageadmin.packs.packs;
 
 
 
@@ -34,6 +35,7 @@ public class menu1 extends javax.swing.JFrame {
     usuarios u1;
     categoriaarticulo ca;
     categoriapack cap;
+    packs pack;
 
 
 /////desktop2/////
@@ -58,6 +60,7 @@ a1=new articulos();
 u1=new usuarios();
 ca=new categoriaarticulo();
 cap=new categoriapack();
+pack=new packs();
 
 desktopadmin.setLayout(layout);
 GridBagConstraints c=new GridBagConstraints();
@@ -71,6 +74,8 @@ desktopadmin.add(u1,c);
 desktopadmin.add(p1,c);
 desktopadmin.add(ca,c);
 desktopadmin.add(cap,c);
+desktopadmin.add(pack,c);
+
 b1.setVisible(false);
 rr1.setVisible(false);
 c1.setVisible(false);
@@ -79,6 +84,7 @@ a1.setVisible(false);
 u1.setVisible(false);
 ca.setVisible(false);
 cap.setVisible(false);
+pack.setVisible(false);
 
     }
 
@@ -121,7 +127,7 @@ cap.setVisible(false);
         paneladministracion = new javax.swing.JPanel();
         menuadministracion = new javax.swing.JPanel();
         btnProveedores = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
+        btnpacks = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         btnarticulos = new javax.swing.JButton();
@@ -347,8 +353,13 @@ cap.setVisible(false);
         });
         menuadministracion.add(btnProveedores);
 
-        jButton16.setText("Packs");
-        menuadministracion.add(jButton16);
+        btnpacks.setText("Packs");
+        btnpacks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpacksActionPerformed(evt);
+            }
+        });
+        menuadministracion.add(btnpacks);
 
         jButton14.setText("Categoria pack");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
@@ -510,6 +521,7 @@ u1.setVisible(false);
 a1.setVisible(false);
 p1.setVisible(false);
 cap.setVisible(false);
+pack.setVisible(false);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -521,6 +533,7 @@ a1.setVisible(false);
 p1.setVisible(false);
 ca.setVisible(false);
 cap.setVisible(false);
+pack.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
@@ -532,6 +545,7 @@ c1.setVisible(true);
 p1.setVisible(false);
 ca.setVisible(false);
 cap.setVisible(false);
+pack.setVisible(false);
     }//GEN-LAST:event_jButton15MouseClicked
 
     private void btnarticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarticulosActionPerformed
@@ -543,6 +557,7 @@ cap.setVisible(false);
         p1.setVisible(false);
         ca.setVisible(false);
         cap.setVisible(false);
+        pack.setVisible(false);
     }//GEN-LAST:event_btnarticulosActionPerformed
 
     private void btnusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuariosActionPerformed
@@ -554,6 +569,7 @@ cap.setVisible(false);
         p1.setVisible(false);
         ca.setVisible(false);
         cap.setVisible(false);
+        pack.setVisible(false);
     }//GEN-LAST:event_btnusuariosActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
@@ -565,6 +581,7 @@ cap.setVisible(false);
         p1.setVisible(true);
         ca.setVisible(false);
         cap.setVisible(false);
+        pack.setVisible(false);
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -576,6 +593,7 @@ cap.setVisible(false);
         p1.setVisible(false);
         ca.setVisible(true);
         cap.setVisible(false);
+        pack.setVisible(false);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
@@ -587,7 +605,20 @@ cap.setVisible(false);
         p1.setVisible(false);
         ca.setVisible(false);
         cap.setVisible(true);
+        pack.setVisible(false);
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void btnpacksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpacksActionPerformed
+        // TODO adb1.setVisible(false);
+        rr1.setVisible(false);
+        c1.setVisible(false);
+        u1.setVisible(false);
+        a1.setVisible(false);
+        p1.setVisible(false);
+        ca.setVisible(false);
+        cap.setVisible(false);
+        pack.setVisible(true);
+    }//GEN-LAST:event_btnpacksActionPerformed
 
     /**
      * @param args the command line arguments
@@ -631,6 +662,7 @@ cap.setVisible(false);
     private javax.swing.JButton btnProveedores;
     private javax.swing.JLabel btnVentas;
     private javax.swing.JButton btnarticulos;
+    private javax.swing.JButton btnpacks;
     private javax.swing.JButton btnusuarios;
     private javax.swing.JPanel desktopadmin;
     private javax.swing.JButton jButton1;
@@ -639,7 +671,6 @@ cap.setVisible(false);
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
