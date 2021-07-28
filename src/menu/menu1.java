@@ -36,7 +36,7 @@ public class menu1 extends javax.swing.JFrame {
     categoriaarticulo ca;
     categoriapack cap;
     packs pack;
-
+    venta venta;
 
 /////desktop2/////
 
@@ -48,6 +48,18 @@ public class menu1 extends javax.swing.JFrame {
     public menu1() {
         initComponents();
 panelventas.setVisible(false);
+
+venta=new venta ();
+
+desktopventa.setLayout(layout);
+GridBagConstraints v=new GridBagConstraints();
+v.gridx=0;
+v.gridy=0;
+
+desktopventa.add(venta,v);
+
+venta.setVisible(true);
+
 panelbodega.setVisible(false);
 panelinformes.setVisible(false);
 paneladministracion.setVisible(false);
@@ -114,6 +126,7 @@ pack.setVisible(false);
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        desktopventa = new javax.swing.JPanel();
         panelbodega = new javax.swing.JPanel();
         menubodega = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
@@ -272,17 +285,38 @@ pack.setVisible(false);
         jButton4.setText("jButton4");
         menuventa.add(jButton4);
 
+        javax.swing.GroupLayout desktopventaLayout = new javax.swing.GroupLayout(desktopventa);
+        desktopventa.setLayout(desktopventaLayout);
+        desktopventaLayout.setHorizontalGroup(
+            desktopventaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        desktopventaLayout.setVerticalGroup(
+            desktopventaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 511, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelventasLayout = new javax.swing.GroupLayout(panelventas);
         panelventas.setLayout(panelventasLayout);
         panelventasLayout.setHorizontalGroup(
             panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menuventa, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+            .addGroup(panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelventasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(desktopventa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         panelventasLayout.setVerticalGroup(
             panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelventasLayout.createSequentialGroup()
                 .addComponent(menuventa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 517, Short.MAX_VALUE))
+            .addGroup(panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelventasLayout.createSequentialGroup()
+                    .addGap(19, 19, 19)
+                    .addComponent(desktopventa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(20, 20, 20)))
         );
 
         menubodega.setBackground(new java.awt.Color(153, 153, 255));
@@ -665,6 +699,7 @@ pack.setVisible(false);
     private javax.swing.JButton btnpacks;
     private javax.swing.JButton btnusuarios;
     private javax.swing.JPanel desktopadmin;
+    private javax.swing.JPanel desktopventa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
