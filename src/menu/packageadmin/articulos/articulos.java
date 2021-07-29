@@ -11,9 +11,11 @@ import javax.swing.table.DefaultTableModel;
 import static menu.packageadmin.articulos.articulos1.btnActualizar;
 import static menu.packageadmin.articulos.articulos1.btnGuardar;
 import static menu.packageadmin.articulos.articulos.TablaArticulos;
-import static menu.packageadmin.articulos.articulos1.cbxCategoria;
+import static menu.packageadmin.articulos.articulos1.Llenarcbxcategorias;
 import static menu.packageadmin.articulos.articulos1.txtArticulo;
 import static menu.packageadmin.articulos.articulos1.txtCodigo;
+import static menu.packageadmin.articulos.articulos1.cbxCategoriaArt;
+import static menu.packageadmin.articulos.articulos1.cbxEstadoArt;
 /**
  *
  * @author bsepu
@@ -52,7 +54,7 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
     
     public static void ActualizarAutomaticamenteArt (){
         
-               
+        Llenarcbxcategorias();       
         DefaultTableModel modelo = (DefaultTableModel) TablaArticulos.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
         modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
         
@@ -71,7 +73,7 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
         Connection con = null;
         try { 
             con = getConection();
-            ps= con.prepareStatement ("SELECT nombre, codigo_articulo, categorias_id_categorias FROM articulos");
+            ps= con.prepareStatement ("SELECT nombre, codigo_articulo, categorias_id_categoria FROM articulos");
        
             rs= ps.executeQuery();
             rsmd = rs.getMetaData ();
@@ -260,7 +262,8 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
         
         txtArticulo.setText(TablaArticulos.getValueAt(fila, 0).toString());    
         txtCodigo.setText(TablaArticulos.getValueAt(fila, 1).toString());
-        cbxCategoria.setSelectedItem(TablaArticulos.getValueAt(fila, 2).toString());        // TODO add your handling code here:
+        cbxCategoriaArt.setSelectedItem(TablaArticulos.getValueAt(fila, 2).toString()); 
+        cbxEstadoArt.setSelectedItem(TablaArticulos.getValueAt(fila, 3).toString());
     }//GEN-LAST:event_TablaArticulosMouseClicked
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
