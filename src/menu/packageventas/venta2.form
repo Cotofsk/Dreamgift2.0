@@ -310,15 +310,15 @@
                                           <Component id="jComboBox1" min="-2" pref="99" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                          <Component id="jDFecha_actual" min="-2" pref="133" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jComboBox2" min="-2" pref="99" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="jDFechaDePedido" min="-2" pref="116" max="-2" attributes="0"/>
                               </Group>
                               <Component id="txtSaludos" min="-2" pref="390" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="127" max="32767" attributes="0"/>
+                          <EmptySpace min="268" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -347,7 +347,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jDFechaDePedido" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jDFecha_actual" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -381,11 +381,13 @@
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtMonto" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbxDescuento" alignment="3" pref="22" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtMonto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxDescuento" alignment="3" pref="22" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -500,7 +502,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDFechaEntrega">
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDFechaDePedido">
+        <Component class="com.toedter.calendar.JDateChooser" name="jDFecha_actual">
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
