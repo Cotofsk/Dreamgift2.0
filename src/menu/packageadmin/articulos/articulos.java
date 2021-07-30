@@ -74,7 +74,7 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
         try { 
             con = getConection();
             ps= con.prepareStatement ("SELECT articulos.nombre,articulos.nombre,categorias.catarticulo,articulos.estado FROM articulos \n" +
-"INNER JOIN categorias on articulos.categorias_id_categoria=categorias.id_categoria ");
+"INNER JOIN categorias on articulos.categorias_id_categoria=categorias.id_categoria");
        
             rs= ps.executeQuery();
             rsmd = rs.getMetaData ();

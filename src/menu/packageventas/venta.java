@@ -9,13 +9,19 @@ import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static menu.packageventas.confirmarpago.txtCodigoPedidoC;
 
 /**
  *
  * @author CotoF
  */
 public class venta extends javax.swing.JPanel {
-
+    
+    confirmarpago cp;
     Venta1 venta1= new Venta1();
     
     public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
@@ -40,9 +46,51 @@ public class venta extends javax.swing.JPanel {
         return con;
     }
     
+    
+     public static void ActualizarAutomaticamenteVenta (){
+             
+        DefaultTableModel modelo = (DefaultTableModel) TablaVenta.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
+        modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
+        
+        PreparedStatement ps; /*Declarar unas variables para hacer las transacciones*/
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        
+        
+        int [] ancho = {30,80,20,60,20,20,20}; /*Arreglo con el ancho de las columnas*/
+        for  (int i = 0; i< TablaVenta.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
+        TablaVenta.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
+             
+        }   
+        
+        Connection con = null;
+        try { 
+            con = getConection();
+            ps= con.prepareStatement ("SELECT pedidos.id_pedido,pedidos.fecha_pedido,clientes.nombre,pedidos.telefono,packs.nombre,pedidos.monto,estados.descripccion_estado FROM pedidos INNER JOIN clientes on pedidos.clientes_id=clientes.id_cliente INNER JOIN packs on pedidos.packs_id_pack=packs.id_pack LEFT JOIN estados on pedidos.estados_idEstado=estados.idEstado");
+       
+            rs= ps.executeQuery();
+            rsmd = rs.getMetaData ();
+            columnas = rsmd.getColumnCount(); /*Cuantas Columnas trae esta consulta*/
+            
+            
+            while(rs.next()){ /*Extraer todo los datos de la consulta*/
+               Object[] filas = new Object[columnas];
+                for (int i = 0; i < columnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+                
+            }
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+  
+    }
+    
     public venta() {
         initComponents();
-        
+        ActualizarAutomaticamenteVenta ();
     }
 
     /**
@@ -65,11 +113,13 @@ public class venta extends javax.swing.JPanel {
         txtidProveedor = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TablaProveedores1 = new javax.swing.JTable();
+        TablaVenta = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtBuscarProv = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        btnConfirmarPago = new javax.swing.JButton();
+        btnActualizarEstado = new javax.swing.JButton();
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setPreferredSize(new java.awt.Dimension(994, 512));
@@ -192,38 +242,38 @@ public class venta extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(251, 248, 248));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ventas Pendientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 16), new java.awt.Color(0, 0, 204))); // NOI18N
 
-        TablaProveedores1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Fecha", "Nombre Cliente", "Telefono", "Pack", "Monto"
+                "Codigo", "Fecha", "Nombre Cliente", "Telefono", "Pack", "Monto", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -234,17 +284,17 @@ public class venta extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        TablaProveedores1.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaProveedores1MouseClicked(evt);
+                TablaVentaMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(TablaProveedores1);
-        if (TablaProveedores1.getColumnModel().getColumnCount() > 0) {
-            TablaProveedores1.getColumnModel().getColumn(1).setHeaderValue("Fecha");
-            TablaProveedores1.getColumnModel().getColumn(3).setHeaderValue("Telefono");
-            TablaProveedores1.getColumnModel().getColumn(4).setHeaderValue("Pack");
-            TablaProveedores1.getColumnModel().getColumn(5).setHeaderValue("Monto");
+        jScrollPane2.setViewportView(TablaVenta);
+        if (TablaVenta.getColumnModel().getColumnCount() > 0) {
+            TablaVenta.getColumnModel().getColumn(1).setHeaderValue("Fecha");
+            TablaVenta.getColumnModel().getColumn(3).setHeaderValue("Telefono");
+            TablaVenta.getColumnModel().getColumn(4).setHeaderValue("Pack");
+            TablaVenta.getColumnModel().getColumn(5).setHeaderValue("Monto");
         }
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -262,7 +312,7 @@ public class venta extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -306,6 +356,22 @@ public class venta extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnConfirmarPago.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnConfirmarPago.setText("Confirmar pago");
+        btnConfirmarPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarPagoActionPerformed(evt);
+            }
+        });
+
+        btnActualizarEstado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnActualizarEstado.setText("Actualizar estado");
+        btnActualizarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarEstadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -315,8 +381,12 @@ public class venta extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnNuevoVenta)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditarVenta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnConfirmarPago)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnActualizarEstado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(539, 539, 539))
@@ -325,7 +395,7 @@ public class venta extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1017, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,15 +404,15 @@ public class venta extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnNuevoVenta)
-                            .addComponent(btnEditarVenta))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
-                .addGap(10, 10, 10)
+                            .addComponent(btnEditarVenta)
+                            .addComponent(btnConfirmarPago)
+                            .addComponent(btnActualizarEstado))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -353,7 +423,7 @@ public class venta extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1023, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +446,8 @@ public class venta extends javax.swing.JPanel {
 
     private void TablaProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProveedoresMouseClicked
 
-       
+     
+        
 
     }//GEN-LAST:event_TablaProveedoresMouseClicked
 
@@ -388,18 +459,30 @@ public class venta extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnEditarVentaActionPerformed
 
-    private void TablaProveedores1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProveedores1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TablaProveedores1MouseClicked
+    private void TablaVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaVentaMouseClicked
+        int fila = TablaVenta.getSelectedRow();    
+    
+        txtCodigoPedidoC.setText(TablaVenta.getValueAt(fila, 0).toString());  
+    }//GEN-LAST:event_TablaVentaMouseClicked
 
     private void txtBuscarProv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarProv1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarProv1ActionPerformed
 
+    private void btnConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagoActionPerformed
+    cp.setVisible(true);
+    }//GEN-LAST:event_btnConfirmarPagoActionPerformed
+
+    private void btnActualizarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarEstadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable TablaProveedores;
-    public static javax.swing.JTable TablaProveedores1;
+    public static javax.swing.JTable TablaVenta;
+    public static javax.swing.JButton btnActualizarEstado;
+    public static javax.swing.JButton btnConfirmarPago;
     public static javax.swing.JButton btnEditarVenta;
     private javax.swing.JButton btnNuevoVenta;
     private javax.swing.JLabel jLabel2;

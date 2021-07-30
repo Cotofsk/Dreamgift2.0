@@ -66,13 +66,13 @@ public class packs extends javax.swing.JPanel {
         int columnas;
         
         
-        int [] ancho = {30,80,60,0}; /*Arreglo con el ancho de las columnas*/
+        int [] ancho = {30,80,60,20,20,10,20,20}; /*Arreglo con el ancho de las columnas*/
         for  (int i = 0; i< TablaPacks.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
-        TablaPacks.getColumnModel().getColumn(3).setMaxWidth(0);
-        TablaPacks.getColumnModel().getColumn(3).setMinWidth(0);
-        TablaPacks.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
-        TablaPacks.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
         TablaPacks.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
+        TablaPacks.getColumnModel().getColumn(7).setMaxWidth(0);
+       TablaPacks.getColumnModel().getColumn(7).setMinWidth(0);
+        TablaPacks.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+        TablaPacks.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
         btnEditarPacks.setEnabled(false);
         }
         
@@ -80,7 +80,7 @@ public class packs extends javax.swing.JPanel {
         Connection con = null;
         try { 
             con = getConection();
-            ps= con.prepareStatement ("SELECT nombre,codigo,estado,idpacks FROM packs");
+            ps= con.prepareStatement ("SELECT packs.codigo,packs.nombre,packs.compuesto,packs.precio,tipo_eventos.tipo_evento,packs.estado,packs.stock_pack,packs.id_pack FROM packs INNER JOIN tipo_eventos on packs.tipo_eventos_id_tipo_evento=tipo_eventos.id_tipo_evento");
        
             rs= ps.executeQuery();
             rsmd = rs.getMetaData ();
@@ -103,7 +103,9 @@ public class packs extends javax.swing.JPanel {
      * Creates new form packs
      */
     public packs() {
-        initComponents();    }
+        initComponents();   
+        ActualizarAutomaticamentePacks();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,35 +152,35 @@ public class packs extends javax.swing.JPanel {
 
         TablaPacks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo Packs", "Nombre Packs", "Precio", "Compuesto", "Stock Disponible", "Estado", "id_Packs"
+                "Codigo Packs", "Nombre Packs", "Compuesto", "Precio", "Tipo de evento", "Estado", "Stock Disponible", "id_Packs"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

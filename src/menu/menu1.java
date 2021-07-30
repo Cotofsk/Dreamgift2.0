@@ -124,8 +124,6 @@ pack.setVisible(false);
         menuventa = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         desktopventa = new javax.swing.JPanel();
         panelbodega = new javax.swing.JPanel();
         menubodega = new javax.swing.JPanel();
@@ -273,17 +271,11 @@ pack.setVisible(false);
 
         menuventa.setBackground(new java.awt.Color(153, 153, 255));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Venta");
         menuventa.add(jButton1);
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Lista destinos");
         menuventa.add(jButton2);
-
-        jButton3.setText("jButton3");
-        menuventa.add(jButton3);
-
-        jButton4.setText("jButton4");
-        menuventa.add(jButton4);
 
         javax.swing.GroupLayout desktopventaLayout = new javax.swing.GroupLayout(desktopventa);
         desktopventa.setLayout(desktopventaLayout);
@@ -707,8 +699,6 @@ pack.setVisible(false);
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
