@@ -64,7 +64,7 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
         int columnas;
         
         
-        int [] ancho = {30,80,60}; /*Arreglo con el ancho de las columnas*/
+        int [] ancho = {30,80,20,60}; /*Arreglo con el ancho de las columnas*/
         for  (int i = 0; i< TablaArticulos.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
         TablaArticulos.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
              
@@ -73,7 +73,8 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
         Connection con = null;
         try { 
             con = getConection();
-            ps= con.prepareStatement ("SELECT nombre, codigo_articulo, categorias_id_categoria FROM articulos");
+            ps= con.prepareStatement ("SELECT articulos.nombre,articulos.nombre,categorias.catarticulo,articulos.estado FROM articulos \n" +
+"INNER JOIN categorias on articulos.categorias_id_categoria=categorias.id_categoria ");
        
             rs= ps.executeQuery();
             rsmd = rs.getMetaData ();
@@ -128,31 +129,31 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
 
         TablaArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nombre Articulo", "Codigo", "Categoria"
+                "Nombre Articulo", "Codigo", "Categoria", "Estado"
             }
         ));
         TablaArticulos.addMouseListener(new java.awt.event.MouseAdapter() {

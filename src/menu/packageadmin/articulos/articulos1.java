@@ -66,7 +66,8 @@ public class articulos1 extends javax.swing.JFrame {
              rs= Sent.executeQuery("select * from categorias");
              while (rs.next()){
              cbxCategoriaArt.addItem(rs.getString("catarticulo"));
-           
+             
+            
              }
             
         } catch (Exception e) {
@@ -239,7 +240,7 @@ public class articulos1 extends javax.swing.JFrame {
         try {
 
             con = getConection();
-            ps = con.prepareStatement("INSERT INTO articulos (nombre,codigo_articulo,categorias_id_categoria,estado) VALUES(?,?,?,?)");
+            ps = con.prepareStatement("INSERT INTO articulos (codigo_articulo,nombre,categorias_id_categoria,estado) VALUES(?,?,?,?)");
             ps.setString(1, txtArticulo.getText());
             ps.setString(2, txtCodigo.getText());
             ps.setInt(3, cbxCategoriaArt.getSelectedIndex());
