@@ -21,7 +21,7 @@ import static menu.packageventas.confirmarpago.txtCodigoPedidoC;
  */
 public class venta extends javax.swing.JPanel {
     
-    confirmarpago cp;
+    confirmarpago cp= new confirmarpago();
     Venta1 venta1= new Venta1();
     
     public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
@@ -463,6 +463,10 @@ public class venta extends javax.swing.JPanel {
         int fila = TablaVenta.getSelectedRow();    
     
         txtCodigoPedidoC.setText(TablaVenta.getValueAt(fila, 0).toString());  
+        
+        
+        
+        
     }//GEN-LAST:event_TablaVentaMouseClicked
 
     private void txtBuscarProv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarProv1ActionPerformed
