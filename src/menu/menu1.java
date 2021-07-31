@@ -18,6 +18,7 @@ import menu.packageadmin.rrss.rrss;
 import menu.packageadmin.usuarios.usuarios;
 import menu.packageventas.venta;
 import menu.packageadmin.packs.packs;
+import menu.packageventas.listadestino.listadestino;
 
 
 
@@ -37,6 +38,7 @@ public class menu1 extends javax.swing.JFrame {
     categoriapack cap;
     packs pack;
     venta venta;
+    listadestino listadestino;
 
 /////desktop2/////
 
@@ -48,8 +50,10 @@ public class menu1 extends javax.swing.JFrame {
     public menu1() {
         initComponents();
 panelventas.setVisible(false);
-
+ this.setLocationRelativeTo(null);
+ 
 venta=new venta ();
+listadestino =new listadestino ();
 
 desktopventa.setLayout(layout);
 GridBagConstraints v=new GridBagConstraints();
@@ -57,8 +61,10 @@ v.gridx=0;
 v.gridy=0;
 
 desktopventa.add(venta,v);
+desktopventa.add(listadestino,v);
 
 venta.setVisible(true);
+listadestino.setVisible(false);
 
 panelbodega.setVisible(false);
 panelinformes.setVisible(false);
@@ -151,7 +157,7 @@ pack.setVisible(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(200, 550));
 
         btnVentas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -272,9 +278,19 @@ pack.setVisible(false);
         menuventa.setBackground(new java.awt.Color(153, 153, 255));
 
         jButton1.setText("Venta");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         menuventa.add(jButton1);
 
         jButton2.setText("Lista destinos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         menuventa.add(jButton2);
 
         javax.swing.GroupLayout desktopventaLayout = new javax.swing.GroupLayout(desktopventa);
@@ -285,14 +301,14 @@ pack.setVisible(false);
         );
         desktopventaLayout.setVerticalGroup(
             desktopventaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 511, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelventasLayout = new javax.swing.GroupLayout(panelventas);
         panelventas.setLayout(panelventasLayout);
         panelventasLayout.setHorizontalGroup(
             panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuventa, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+            .addComponent(menuventa, javax.swing.GroupLayout.DEFAULT_SIZE, 1027, Short.MAX_VALUE)
             .addGroup(panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelventasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -303,15 +319,15 @@ pack.setVisible(false);
             panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelventasLayout.createSequentialGroup()
                 .addComponent(menuventa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 517, Short.MAX_VALUE))
+                .addGap(0, 540, Short.MAX_VALUE))
             .addGroup(panelventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelventasLayout.createSequentialGroup()
-                    .addGap(19, 19, 19)
-                    .addComponent(desktopventa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(20, 20, 20)))
+                    .addGap(43, 43, 43)
+                    .addComponent(desktopventa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(20, Short.MAX_VALUE)))
         );
 
-        menubodega.setBackground(new java.awt.Color(153, 153, 255));
+        menubodega.setBackground(new java.awt.Color(0, 102, 204));
 
         jButton8.setText("jButton8");
         menubodega.add(jButton8);
@@ -335,7 +351,7 @@ pack.setVisible(false);
                 .addGap(0, 517, Short.MAX_VALUE))
         );
 
-        menuinformes.setBackground(new java.awt.Color(153, 153, 255));
+        menuinformes.setBackground(new java.awt.Color(0, 102, 204));
 
         jButton7.setText("jButton7");
         menuinformes.add(jButton7);
@@ -645,6 +661,17 @@ pack.setVisible(false);
         cap.setVisible(false);
         pack.setVisible(true);
     }//GEN-LAST:event_btnpacksActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        listadestino.setVisible(true);
+        venta.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       listadestino.setVisible(false);
+        venta.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

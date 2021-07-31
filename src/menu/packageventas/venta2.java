@@ -73,7 +73,7 @@ public class venta2 extends javax.swing.JFrame {
     
     
     
-        public void cbxPacks(){
+    public void cbxPacks(){
 
         this.setLocationRelativeTo(null);
         
@@ -94,7 +94,27 @@ public class venta2 extends javax.swing.JFrame {
         jDFecha_actual.setCalendar(fecha_actual);
                 
     }
-  
+    public void cbxRRSS(){
+
+        this.setLocationRelativeTo(null);
+        
+        this.cbxRRSS.removeAllItems();
+        Connection con = null;
+        
+        try {
+             con = getConection();
+             Statement Sent=con.createStatement();
+             rs= Sent.executeQuery("select * from redes");
+             while (rs.next()){
+                 this.cbxRRSS.addItem(rs.getString("nombre"));
+             }
+            
+        } catch (Exception e) {
+        }
+        
+        jDFecha_actual.setCalendar(fecha_actual);
+                
+    }
   
   
   
@@ -102,6 +122,7 @@ public class venta2 extends javax.swing.JFrame {
         initComponents();
         cbxComunas();
         cbxPacks();
+        cbxRRSS();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -125,7 +146,6 @@ public class venta2 extends javax.swing.JFrame {
         txtTelefonoDestinatario = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        cbxRRSS = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         cbxPack = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -145,6 +165,8 @@ public class venta2 extends javax.swing.JFrame {
         cbxHoraFinal = new javax.swing.JComboBox<>();
         cbxDescuento = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
+        cbxRRSS = new javax.swing.JComboBox<>();
+        jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -192,8 +214,6 @@ public class venta2 extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setText("Email");
 
-        cbxRRSS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -214,9 +234,7 @@ public class venta2 extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(cbxComunaDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(228, 228, 228)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel14)
@@ -245,9 +263,7 @@ public class venta2 extends javax.swing.JFrame {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbxComunaDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbxRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxComunaDestinatario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addContainerGap())))
@@ -292,9 +308,14 @@ public class venta2 extends javax.swing.JFrame {
 
         txtMonto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        cbxHoraInicial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxHoraInicial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "10:30", "11:00", "11:00", " " }));
+        cbxHoraInicial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxHoraInicialActionPerformed(evt);
+            }
+        });
 
-        cbxHoraFinal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxHoraFinal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "10:30", "11:00", "11:00", " " }));
 
         cbxDescuento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxDescuento.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +326,9 @@ public class venta2 extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel20.setText("% Descuento");
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel21.setText("RRSS");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -331,27 +355,6 @@ public class venta2 extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jDFechaEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                    .addComponent(cbxPack, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(57, 57, 57)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel18))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(cbxHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jLabel17)
-                                        .addGap(8, 8, 8)
-                                        .addComponent(jDFecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cbxHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel20)
@@ -363,11 +366,39 @@ public class venta2 extends javax.swing.JFrame {
                                 .addComponent(btnAtrasVenta)
                                 .addGap(34, 34, 34)))
                         .addComponent(btnSiguienteVenta)
-                        .addGap(33, 33, 33))))
+                        .addGap(33, 33, 33))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jDFechaEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                    .addComponent(cbxPack, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(57, 57, 57)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel18)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(txtSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel21)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(133, 133, 133)
+                                .addComponent(jLabel17))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbxHoraFinal, 0, 99, Short.MAX_VALUE)
+                                    .addComponent(cbxHoraInicial, 0, 99, Short.MAX_VALUE)
+                                    .addComponent(cbxRRSS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(8, 8, 8)
+                        .addComponent(jDFecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDFecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -375,13 +406,11 @@ public class venta2 extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addComponent(jLabel17))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cbxPack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(cbxHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cbxPack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel6)
+                                .addComponent(cbxHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel19)
@@ -389,17 +418,24 @@ public class venta2 extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel18)
                                 .addComponent(cbxHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(9, 9, 9)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(cbxRRSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel10)
-                        .addComponent(cbxDescuento, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)))
+                        .addComponent(cbxDescuento)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtrasVenta)
@@ -439,16 +475,15 @@ public class venta2 extends javax.swing.JFrame {
             con = getConection();
             ps = con.prepareStatement("INSERT INTO pedidos (monto,fecha_pedido,nombre_destinatario,direccion_destinatario,telefono,email,fecha_entrega,hora_entrega_inicial,hora_entrega_final,saludo,comunas_id_comuna,packs_id_pack,clientes_id,redes_idRedes) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             
+            
             ps.setString(1, txtMonto.getText());
             ps.setDate(2, new java.sql.Date(jDFecha_actual.getDate().getTime()));
-            //3
-            ps.setString(1, txtMonto.getText());
-            ps.setString(2, jDFecha_actual.getDateFormatString());
             ps.setString(3, txtNombreDestinatario.getText());
             ps.setString(4, txtDireccionDestinatario.getText());
             ps.setString(5, txtTelefonoDestinatario.getText());
             ps.setString(6, txtEmail.getText());
-            ps.setString(7, jDFechaEntrega.getDateFormatString());
+            ps.setDate(7, new java.sql.Date(jDFechaEntrega.getDate().getTime()));
+           
             ps.setString(8, cbxHoraInicial.getSelectedItem().toString());
             ps.setString(9, cbxHoraFinal.getSelectedItem().toString());
             ps.setString(10, txtSaludo.getText());
@@ -457,14 +492,15 @@ public class venta2 extends javax.swing.JFrame {
             ps.setString(13, txtidCliente.getText());
             ps.setInt(14, cbxRRSS.getSelectedIndex());
             
-             ActualizarAutomaticamenteVenta();
+             
 
             int res = ps.executeUpdate();
 
             if (res > 0) {
                 JOptionPane.showMessageDialog(null, "Venta agregada con exito");
             //limpiarCajas();
-                //ActualizarAutomaticamente();
+            ActualizarAutomaticamenteVenta();
+            dispose ();
             } else {
                 JOptionPane.showMessageDialog(null, "Error al agregar la nueva venta");
                 //limpiarCajas();
@@ -484,6 +520,10 @@ public class venta2 extends javax.swing.JFrame {
     private void cbxDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDescuentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxDescuentoActionPerformed
+
+    private void cbxHoraInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxHoraInicialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxHoraInicialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -540,6 +580,7 @@ public class venta2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

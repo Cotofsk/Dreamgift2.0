@@ -48,6 +48,7 @@ public class categoriaarticulo1 extends javax.swing.JFrame {
      */
     public categoriaarticulo1() {
         initComponents();
+         this.setLocationRelativeTo(null);
     }
 
     /**

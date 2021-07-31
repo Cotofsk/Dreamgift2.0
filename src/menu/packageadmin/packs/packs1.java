@@ -39,7 +39,8 @@ public class packs1 extends javax.swing.JFrame {
     String str [] = {"articulos"};
     public packs1() {
         initComponents();
-        
+         this.setLocationRelativeTo(null);
+         
          jList1Model = new DefaultListModel();
          jList2Model = new DefaultListModel();
 

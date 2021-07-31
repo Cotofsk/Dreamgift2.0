@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static menu.packageventas.confirmarpago.txtCodigoPedidoC;
+import static menu.packageventas.estado.txtidpedidoEstado;
 
 /**
  *
@@ -22,6 +23,7 @@ import static menu.packageventas.confirmarpago.txtCodigoPedidoC;
 public class venta extends javax.swing.JPanel {
     
     confirmarpago cp= new confirmarpago();
+    estado estado1=new estado();
     Venta1 venta1= new Venta1();
     
     public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
@@ -467,6 +469,7 @@ public class venta extends javax.swing.JPanel {
         
         
         
+        txtidpedidoEstado.setText(TablaVenta.getValueAt(fila, 0).toString());  
     }//GEN-LAST:event_TablaVentaMouseClicked
 
     private void txtBuscarProv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarProv1ActionPerformed
@@ -474,11 +477,11 @@ public class venta extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarProv1ActionPerformed
 
     private void btnConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagoActionPerformed
-    cp.setVisible(true);
+   cp.setVisible(true);
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
 
     private void btnActualizarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEstadoActionPerformed
-        // TODO add your handling code here:
+   estado1.setVisible(true);
     }//GEN-LAST:event_btnActualizarEstadoActionPerformed
 
 

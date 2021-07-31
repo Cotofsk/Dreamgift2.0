@@ -269,6 +269,7 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         art.setVisible(true);
+        Llenarcbxcategorias();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevoActionPerformed

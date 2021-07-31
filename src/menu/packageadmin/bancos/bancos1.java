@@ -52,6 +52,7 @@ public class bancos1 extends javax.swing.JFrame {
      */
     public bancos1() {
         initComponents();
+         this.setLocationRelativeTo(null);
 
     }
 

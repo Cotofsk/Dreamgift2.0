@@ -47,6 +47,7 @@ public class rrss1 extends javax.swing.JFrame {
      */
     public rrss1() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

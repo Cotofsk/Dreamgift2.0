@@ -47,6 +47,7 @@ public class comunas1 extends javax.swing.JFrame {
      */
     public comunas1() {
         initComponents();
+        this.setLocationRelativeTo(null);
 
     }
 

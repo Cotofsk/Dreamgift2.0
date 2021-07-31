@@ -49,6 +49,7 @@ public class categoriapack1 extends javax.swing.JFrame {
      */
     public categoriapack1() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
