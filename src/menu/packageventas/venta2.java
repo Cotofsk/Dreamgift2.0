@@ -307,17 +307,22 @@ public class venta2 extends javax.swing.JFrame {
         jLabel10.setText("Monto");
 
         txtMonto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMontoActionPerformed(evt);
+            }
+        });
 
-        cbxHoraInicial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "10:30", "11:00", "11:00", " " }));
+        cbxHoraInicial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00" }));
         cbxHoraInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxHoraInicialActionPerformed(evt);
             }
         });
 
-        cbxHoraFinal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "10:30", "11:00", "11:00", " " }));
+        cbxHoraFinal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00" }));
 
-        cbxDescuento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxDescuento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0%", "5%", "10%", "15%", "20%", "30%", "40%", "50%", "60%" }));
         cbxDescuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxDescuentoActionPerformed(evt);
@@ -524,6 +529,10 @@ public class venta2 extends javax.swing.JFrame {
     private void cbxHoraInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxHoraInicialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxHoraInicialActionPerformed
+
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
+       
+    }//GEN-LAST:event_txtMontoActionPerformed
 
     /**
      * @param args the command line arguments
