@@ -489,7 +489,9 @@ public class venta2 extends javax.swing.JFrame {
             ps.setString(5, txtTelefonoDestinatario.getText());
             ps.setString(6, txtEmail.getText());
             ps.setDate(7, new java.sql.Date(jDFechaEntrega.getDate().getTime()));
-           
+            
+            
+            
             ps.setString(8, cbxHoraInicial.getSelectedItem().toString());
             ps.setString(9, cbxHoraFinal.getSelectedItem().toString());
             ps.setString(10, txtSaludo.getText());
