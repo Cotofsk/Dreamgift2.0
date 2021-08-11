@@ -5,17 +5,18 @@
  */
 package menu.packageadmin.proveedores;
 
-import java.awt.BorderLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.JFrame;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import static menu.packageadmin.proveedores.proveedores.ActualizarAutomaticamenteProv;
-import static menu.packageadmin.proveedores.proveedores.TablaProveedores;
 import static menu.packageadmin.proveedores.proveedores.limpiarCajasProv;
 import static menu.packageadmin.proveedores.proveedores.txtidProveedor;
+import menu.packegemetodo.prove;
 
 
 /**
@@ -47,7 +48,36 @@ public class proveedor1 extends javax.swing.JFrame {
         return con;
     }
     
-
+    public List ListarProveedor(){
+        
+        List<prove> Listapr = new ArrayList();
+        String sql = "SELECT * FROM proveedores";
+        
+        Connection con = null;
+        
+        try {
+            
+            con = getConection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                prove pr = new prove();
+                pr.setId(rs.getInt("id_proveedor"));
+                pr.setRut(rs.getString("rut_proveedor"));
+                pr.setNombre(rs.getString("razon_social"));
+                pr.setRepesentante(rs.getString("representante"));
+                pr.setTelefono(rs.getString("fono"));
+                pr.setDireccion(rs.getString("direccion"));
+                pr.setEstado(rs.getString("estado_pro"));
+                Listapr.add(pr);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return Listapr;
+    }
      
     public proveedor1() {
         initComponents();

@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static menu.packageadmin.articulos.articulos1.PASSWORD;
@@ -17,6 +20,7 @@ import static menu.packageadmin.articulos.articulos1.URL;
 import static menu.packageadmin.articulos.articulos1.USERNAME;
 import static menu.packageadmin.articulos.articulos1.getConection;
 import static menu.packageadmin.articulos.articulos.ActualizarAutomaticamenteArt;
+import menu.packegemetodo.arti;
 
 /**
  *
@@ -46,11 +50,41 @@ public class articulos1 extends javax.swing.JFrame {
         return con;
     }
     
-     private void limpiarCajas() {
+    private void limpiarCajas() {
         
         txtArticulo.setText(null);
         txtCodigo.setText(null);
         cbxCategoriaArt.setSelectedIndex(0);
+    }
+     
+    public List ListarArticulo(){
+        
+        List<arti> Listaar = new ArrayList();
+        String sql = "SELECT * FROM articulos";
+        
+        Connection con = null;
+        
+        try {
+            
+            con = getConection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                arti ar = new arti();
+                ar.setId(rs.getInt("id_articulo"));
+                ar.setCodigo(rs.getString("codigo_articulo"));
+                ar.setNombre(rs.getString("nombre"));
+                ar.setCategoria(rs.getInt("categorias_id_categoria"));
+                ar.setStock(rs.getInt("stock_articulo"));
+                ar.setEstado(rs.getString("estado"));
+                Listaar.add(ar);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return Listaar;
     }
 
     public static void  Llenarcbxcategorias() {  
