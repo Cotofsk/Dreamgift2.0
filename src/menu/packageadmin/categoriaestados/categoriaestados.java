@@ -278,6 +278,7 @@ public class categoriaestados extends javax.swing.JPanel {
         txtNombreCatEstados.setText(TablaCatEstados.getValueAt(fila, 0).toString());
         txtCodigoCatEstados.setText(TablaCatEstados.getValueAt(fila, 1).toString());
         cbxCatEstados.setSelectedItem(TablaCatEstados.getValueAt(fila, 2).toString());
+        
         txtidCatEstados.setText(TablaCatEstados.getModel().getValueAt(TablaCatEstados.getSelectedRow(),3).toString());
         btnEditarCatEstados.setEnabled(true);
     }//GEN-LAST:event_TablaCatEstadosMouseClicked

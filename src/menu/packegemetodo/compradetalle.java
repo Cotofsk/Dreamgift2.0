@@ -11,8 +11,8 @@ import java.sql.Date;
  *
  * @author Usuario
  */
-public class compra {
-    private int idlote  ;
+public class compradetalle {
+private int idlote  ;
     private int idfactura;
     private int idarticulo;
     private int cantidad;
@@ -21,11 +21,11 @@ public class compra {
     private String marca;
    
     
-    public compra(){
+    public compradetalle(){
         
     }
 
-    public compra(int idlote, int idfactura, int idarticulo, int cantidad, int valor,Date fechavenc, String marca) {
+    public compradetalle(int idlote, int idfactura, int idarticulo, int cantidad, int valor,Date fechavenc, String marca) {
         this.idlote = idlote;
         this.idfactura = idfactura;
         this.idarticulo = idarticulo;
