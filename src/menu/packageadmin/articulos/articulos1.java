@@ -86,6 +86,8 @@ public class articulos1 extends javax.swing.JFrame {
         }
         return Listaar;
     }
+    
+    
 
     public static void  Llenarcbxcategorias() {  
         

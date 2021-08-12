@@ -16,6 +16,7 @@ import static menu.packageadmin.articulos.articulos1.txtArticulo;
 import static menu.packageadmin.articulos.articulos1.txtCodigo;
 import static menu.packageadmin.articulos.articulos1.cbxCategoriaArt;
 import static menu.packageadmin.articulos.articulos1.cbxEstadoArt;
+import menu.packegemetodo.arti;
 /**
  *
  * @author bsepu
@@ -51,6 +52,37 @@ public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Dir
     txtBuscar.setText(null);
 
     }
+    
+    
+    public arti BuscarId(int id){
+        arti ar = new arti();
+        String sql = "SELECT pr.id AS id_proveedor, pr.nombre AS nombre_proveedor, p.* FROM proveedor pr INNER JOIN productos p ON p.proveedor = pr.id WHERE p.id = ?";
+         Connection con = null;
+         try {
+            con = getConection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                ar.setId(rs.getInt("id_articulo"));
+                ar.setCodigo(rs.getString("codigo_articulo"));
+                ar.setNombre(rs.getString("nombre"));
+                ar.setCategoria(rs.getInt("categorias_id_categoria "));           
+                ar.setStock(rs.getInt("stock_articulo"));
+                ar.setEstado(rs.getString("estado"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return ar;
+    }
+    
+    
+    
+    
+    
+    
+    
     
     public static void ActualizarAutomaticamenteArt (){
         
