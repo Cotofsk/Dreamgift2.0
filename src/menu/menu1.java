@@ -18,8 +18,6 @@ import menu.packageadmin.rrss.rrss;
 import menu.packageadmin.usuarios.usuarios;
 import menu.packageventas.venta;
 import menu.packageadmin.packs.packs;
-import menu.packagebodega.registrodecompra;
-import menu.packagebodega.revisionfactura;
 import menu.packageventas.listadestino.listadestino;
 
 
@@ -41,8 +39,6 @@ public class menu1 extends javax.swing.JFrame {
     packs pack;
     venta venta;
     listadestino listadestino;
-    registrodecompra compra;
-    revisionfactura revision;
 /////desktop2/////
 
 
@@ -74,19 +70,15 @@ panelbodega.setVisible(false);
 
 this.setLocationRelativeTo(null);
 
-compra =new registrodecompra ();
-revision=new revisionfactura();
 
 desktopbodega.setLayout(layout);
 GridBagConstraints b=new GridBagConstraints();
 
 b.gridx=0;
 b.gridy=0;
-desktopbodega.add(compra,b);
-desktopbodega.add(revision,b);
 
-compra.setVisible(false);
-revision.setVisible(false);
+
+
 
 
 panelinformes.setVisible(false);
@@ -743,18 +735,15 @@ pack.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnRegistroCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroCompraActionPerformed
-       compra.setVisible(true);
-       revision.setVisible(false);
+
     }//GEN-LAST:event_btnRegistroCompraActionPerformed
 
     private void btnRegistroOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroOrdenCompraActionPerformed
-       compra.setVisible(false);
-       revision.setVisible(false);
+
     }//GEN-LAST:event_btnRegistroOrdenCompraActionPerformed
 
     private void btnRevisionFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisionFacturaActionPerformed
-       compra.setVisible(false);
-       revision.setVisible(true);
+
     }//GEN-LAST:event_btnRevisionFacturaActionPerformed
 
     /**
