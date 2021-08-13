@@ -9,12 +9,12 @@ package menu.packagebodega;
  *
  * @author Usuario
  */
-public class RevisionFactura extends javax.swing.JPanel {
+public class facturas extends javax.swing.JPanel {
 
     /**
      * Creates new form RevisionFactura
      */
-    public RevisionFactura() {
+    public facturas() {
         initComponents();
     }
 
@@ -31,22 +31,14 @@ public class RevisionFactura extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaFacturaRegistradas = new javax.swing.JTable();
+        txtNFacturaRevision = new javax.swing.JTextField();
+        btnBuscarFac = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        cbxProveedorRavision = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txtNFacturaRevision = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        txtRutRevision = new javax.swing.JTextField();
-        jDFechaInicial = new com.toedter.calendar.JDateChooser();
-        jLabel6 = new javax.swing.JLabel();
-        btnBuscarFac = new javax.swing.JButton();
         btnLimpiarRevision = new javax.swing.JButton();
-        jcbConRango = new javax.swing.JCheckBox();
-        jLabel7 = new javax.swing.JLabel();
-        jDFechaHasta = new com.toedter.calendar.JDateChooser();
+        btnLimpiarRevision1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaDetalleFactura = new javax.swing.JTable();
@@ -110,19 +102,49 @@ public class RevisionFactura extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(TablaFacturaRegistradas);
 
+        btnBuscarFac.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBuscarFac.setText("Buscar");
+        btnBuscarFac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarFacMouseClicked(evt);
+            }
+        });
+        btnBuscarFac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarFacActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("N° de Factura");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNFacturaRevision, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscarFac)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNFacturaRevision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarFac, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -131,7 +153,7 @@ public class RevisionFactura extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Revisión de Factura");
+        jLabel3.setText("Facturas");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -153,113 +175,47 @@ public class RevisionFactura extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(251, 248, 248));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de Factura", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 16), new java.awt.Color(0, 0, 204))); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Proveedor");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("N° de Factura");
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setText("Rut");
-
-        txtRutRevision.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Fecha");
-
-        btnBuscarFac.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnBuscarFac.setText("Buscar");
-        btnBuscarFac.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarFacMouseClicked(evt);
-            }
-        });
-        btnBuscarFac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarFacActionPerformed(evt);
-            }
-        });
-
         btnLimpiarRevision.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnLimpiarRevision.setText("Limpiar");
+        btnLimpiarRevision.setText("Editar");
         btnLimpiarRevision.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarRevisionActionPerformed(evt);
             }
         });
 
-        jcbConRango.setText("Rango de Fecha");
-        jcbConRango.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiarRevision1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLimpiarRevision1.setText("Agregar Factura");
+        btnLimpiarRevision1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbConRangoActionPerformed(evt);
+                btnLimpiarRevision1ActionPerformed(evt);
             }
         });
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setText("A");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(txtNFacturaRevision, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(txtRutRevision, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxProveedorRavision, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jDFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jDFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jcbConRango))
-                .addGap(0, 175, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBuscarFac)
-                    .addComponent(btnLimpiarRevision))
-                .addGap(110, 110, 110))
+                .addGap(194, 194, 194)
+                .addComponent(btnLimpiarRevision)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(39, 39, 39)
+                    .addComponent(btnLimpiarRevision1)
+                    .addContainerGap(812, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNFacturaRevision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(cbxProveedorRavision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtRutRevision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12)
-                        .addComponent(jLabel6))
-                    .addComponent(jDFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jDFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcbConRango)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBuscarFac)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(btnLimpiarRevision)
-                .addGap(32, 32, 32))
+                .addContainerGap())
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                    .addContainerGap(21, Short.MAX_VALUE)
+                    .addComponent(btnLimpiarRevision1)
+                    .addGap(12, 12, 12)))
         );
 
         jPanel5.setBackground(new java.awt.Color(251, 248, 248));
@@ -320,13 +276,13 @@ public class RevisionFactura extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -345,12 +301,12 @@ public class RevisionFactura extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -358,30 +314,30 @@ public class RevisionFactura extends javax.swing.JPanel {
 
     }//GEN-LAST:event_TablaFacturaRegistradasMouseClicked
 
-    private void btnBuscarFacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarFacMouseClicked
-
+    private void jcbSinFecha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSinFecha1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarFacMouseClicked
+    }//GEN-LAST:event_jcbSinFecha1ActionPerformed
 
-    private void btnBuscarFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFacActionPerformed
-
-    }//GEN-LAST:event_btnBuscarFacActionPerformed
+    private void TablaDetalleFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDetalleFacturaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaDetalleFacturaMouseClicked
 
     private void btnLimpiarRevisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarRevisionActionPerformed
 
     }//GEN-LAST:event_btnLimpiarRevisionActionPerformed
 
-    private void jcbSinFecha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSinFecha1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbSinFecha1ActionPerformed
+    private void btnBuscarFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFacActionPerformed
 
-    private void jcbConRangoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConRangoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbConRangoActionPerformed
+    }//GEN-LAST:event_btnBuscarFacActionPerformed
 
-    private void TablaDetalleFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDetalleFacturaMouseClicked
+    private void btnBuscarFacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarFacMouseClicked
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_TablaDetalleFacturaMouseClicked
+    }//GEN-LAST:event_btnBuscarFacMouseClicked
+
+    private void btnLimpiarRevision1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarRevision1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiarRevision1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -389,24 +345,16 @@ public class RevisionFactura extends javax.swing.JPanel {
     public static javax.swing.JTable TablaFacturaRegistradas;
     private javax.swing.JButton btnBuscarFac;
     public static javax.swing.JButton btnLimpiarRevision;
-    public static javax.swing.JComboBox<String> cbxProveedorRavision;
-    private com.toedter.calendar.JDateChooser jDFechaHasta;
-    private com.toedter.calendar.JDateChooser jDFechaInicial;
-    private javax.swing.JLabel jLabel12;
+    public static javax.swing.JButton btnLimpiarRevision1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JCheckBox jcbConRango;
     private javax.swing.JCheckBox jcbSinFecha1;
     public static javax.swing.JTextField txtNFacturaRevision;
-    public static javax.swing.JTextField txtRutRevision;
     // End of variables declaration//GEN-END:variables
 }

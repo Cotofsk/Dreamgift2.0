@@ -5,17 +5,96 @@
  */
 package menu.packagebodega;
 
+import com.mysql.jdbc.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Usuario
  */
-public class RegistrodeCompra extends javax.swing.JPanel {
+public class ordendecompra extends javax.swing.JPanel {
+    
+    nuevaordencompra nuevaordencompra =new nuevaordencompra();
+    
+    public static final String URL = "jdbc:mysql://localhost:3306/dreamgifts"; //Direccion, puerto y nombre de la Base de Datos
+    public static final String USERNAME = "root"; //Usuario de Acceso a MySQL
+    public static final String PASSWORD = ""; //Password del usuario
+    
+    PreparedStatement ps;
+    ResultSet rs;
+
+        public static Connection getConection() {
+        Connection con = null;
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
+           // JOptionPane.showMessageDialog(null, "Conexion exitosa");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return con;
+    }
+    
+    
+        public static void ActualizarAutomaticamenteTablaOrdenCompra (){
+        
+               
+        DefaultTableModel modelo = (DefaultTableModel) TablaOrdenCompra.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
+        modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
+        
+        PreparedStatement ps; /*Declarar unas variables para hacer las transacciones*/
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        
+        
+        int [] ancho = {30,80,60,0}; /*Arreglo con el ancho de las columnas*/
+        for  (int i = 0; i< TablaOrdenCompra.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
+        TablaOrdenCompra.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
+             
+        }   
+        
+        Connection con = null;
+        try { 
+            con = getConection();
+            ps= con.prepareStatement ("SELECT  id_orden_compra,Proveedor_ID_Proveedor,Fecha_Orden FROM orden_compra");
+       
+            rs= ps.executeQuery();
+            rsmd = rs.getMetaData ();
+            columnas = rsmd.getColumnCount(); /*Cuantas Columnas trae esta consulta*/
+            
+            
+            while(rs.next()){ /*Extraer todo los datos de la consulta*/
+               Object[] filas = new Object[columnas];
+                for (int i = 0; i < columnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+                
+            }
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+  
+    }
+
+        
 
     /**
      * Creates new form RegistrodeCompra
      */
-    public RegistrodeCompra() {
+    public ordendecompra() {
         initComponents();
+        ActualizarAutomaticamenteTablaOrdenCompra ();
     }
 
     /**
@@ -36,14 +115,17 @@ public class RegistrodeCompra extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaIngresoArticulo = new javax.swing.JTable();
+        TablaOrdenCompra = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TablaDetalleOrden = new javax.swing.JTable();
         txtidProveedor = new javax.swing.JTextField();
+        idfila = new javax.swing.JTextField();
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setPreferredSize(new java.awt.Dimension(994, 512));
 
         btnNuevaCompras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNuevaCompras.setText("Nueva Compra");
+        btnNuevaCompras.setText("Nueva Orden");
         btnNuevaCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnNuevaComprasMouseClicked(evt);
@@ -77,7 +159,7 @@ public class RegistrodeCompra extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Registro de Compras");
+        jLabel3.setText("Ordenes Compras");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -99,38 +181,38 @@ public class RegistrodeCompra extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(251, 248, 248));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Articulo Ingresados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 16), new java.awt.Color(0, 0, 204))); // NOI18N
 
-        TablaIngresoArticulo.setModel(new javax.swing.table.DefaultTableModel(
+        TablaOrdenCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Codigo", "Fecha de Ingreso", "Articulos", "Cantidad", "Valor"
+                "Numero orden", "Proveedor", "Fecha de orden"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -141,12 +223,42 @@ public class RegistrodeCompra extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        TablaIngresoArticulo.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaOrdenCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaIngresoArticuloMouseClicked(evt);
+                TablaOrdenCompraMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(TablaIngresoArticulo);
+        jScrollPane1.setViewportView(TablaOrdenCompra);
+
+        TablaDetalleOrden.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Articulo", "Cantidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaDetalleOrden.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaDetalleOrdenMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TablaDetalleOrden);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -154,15 +266,19 @@ public class RegistrodeCompra extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         txtidProveedor.setText("a");
@@ -171,6 +287,8 @@ public class RegistrodeCompra extends javax.swing.JPanel {
                 txtidProveedorActionPerformed(evt);
             }
         });
+
+        idfila.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,13 +299,15 @@ public class RegistrodeCompra extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 7, Short.MAX_VALUE)
+                        .addGap(0, 17, Short.MAX_VALUE)
                         .addComponent(btnNuevaCompras)
                         .addGap(18, 18, 18)
                         .addComponent(btnEditarCompra)
                         .addGap(304, 304, 304)
                         .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(241, 241, 241)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(idfila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(176, 176, 176)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(txtBuscarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,7 +323,8 @@ public class RegistrodeCompra extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnEditarCompra)
                         .addComponent(btnNuevaCompras)
-                        .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtidProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(idfila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtBuscarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)))
@@ -232,7 +353,7 @@ public class RegistrodeCompra extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNuevaComprasMouseClicked
 
     private void btnNuevaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaComprasActionPerformed
-      
+      nuevaordencompra.setVisible(true);
     }//GEN-LAST:event_btnNuevaComprasActionPerformed
 
     private void btnEditarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCompraActionPerformed
@@ -243,26 +364,78 @@ public class RegistrodeCompra extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarProvActionPerformed
 
-    private void TablaIngresoArticuloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaIngresoArticuloMouseClicked
+    private void TablaOrdenCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaOrdenCompraMouseClicked
+        int fila = TablaOrdenCompra.getSelectedRow();
+        idfila.setText(TablaOrdenCompra.getValueAt(fila, 0).toString());
+       
+       
+               
+        DefaultTableModel modelo = (DefaultTableModel) TablaDetalleOrden.getModel(); /*Tomar la tabla el modelo que ya estamos agregando*/
+        modelo.setRowCount(0);/*Para que siempre que se ejecute reinicie las filas existentes*/ 
+        
+        PreparedStatement ps; /*Declarar unas variables para hacer las transacciones*/
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        
+        
+        int [] ancho = {30,80,60,0}; /*Arreglo con el ancho de las columnas*/
+        for  (int i = 0; i< TablaDetalleOrden.getColumnCount(); i++){ /*consulta a la tabla el numero de columna que tiene*/
+        TablaDetalleOrden.getColumnModel().getColumn(i).setPreferredWidth(ancho[i]); 
+             
+        }   
+        
+        Connection con = null;
+        try { 
+            con = getConection();
+            ps= con.prepareStatement ("SELECT articulos.nombre,detalle_orden_compra.Cantidad_Art FROM detalle_orden_compra INNER JOIN articulos on detalle_orden_compra.articulo_id_articulo=articulos.id_articulo WHERE orden_ide_orden_compra=" + fila );
+        
+            rs= ps.executeQuery();
+            rsmd = rs.getMetaData ();
+            columnas = rsmd.getColumnCount(); /*Cuantas Columnas trae esta consulta*/
+            
+            
+            while(rs.next()){ /*Extraer todo los datos de la consulta*/
+               Object[] filas = new Object[columnas];
+                for (int i = 0; i < columnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+                
+            }
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+  
+    
+
+        
 
      
-    }//GEN-LAST:event_TablaIngresoArticuloMouseClicked
+    }//GEN-LAST:event_TablaOrdenCompraMouseClicked
 
     private void txtidProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidProveedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtidProveedorActionPerformed
 
+    private void TablaDetalleOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDetalleOrdenMouseClicked
+
+    }//GEN-LAST:event_TablaDetalleOrdenMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTable TablaIngresoArticulo;
+    public static javax.swing.JTable TablaDetalleOrden;
+    public static javax.swing.JTable TablaOrdenCompra;
     public static javax.swing.JButton btnEditarCompra;
     private javax.swing.JButton btnNuevaCompras;
+    private javax.swing.JTextField idfila;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTextField txtBuscarProv;
     public static javax.swing.JTextField txtidProveedor;
     // End of variables declaration//GEN-END:variables
